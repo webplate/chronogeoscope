@@ -1,12 +1,12 @@
-var screen_width = 598;
-var screen_height = 598;
+var screen_width = 794;
+var screen_height = screen_width;
 var map_h = 530;
-var map_w = 530;
-var frame_h = 598;
-var frame_w = 598;
-var ticker_w = 37;
-var ticker_h = 261;
-var ticker_pivot_x = 19;
+var map_w = map_h;
+var frame_h = 794;
+var frame_w = frame_h;
+var ticker_w = 43;
+var ticker_h = 297;
+var ticker_pivot_x = ticker_w/2;
 var ticker_pivot_y = ticker_h - ticker_pivot_x;
 var spot_color = 0xFF0B0B;
 
@@ -135,14 +135,12 @@ function animate() {
     var date = new Date();
     var seconds = Math.round(date.getTime()/1000.0);
     
-    // calculate analogic time
-    var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
-    var angle = aHour / 24. * 2 * Math.PI;
-    //~ console.log(angle);
-    
     // update every second only
     if (app_time <  seconds) {
         app_time = seconds;
+        // calculate analogic time
+        var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
+        var angle = aHour / 24. * 2 * Math.PI;
         //rotate the container!
         container.rotation = angle;
         // update time display
