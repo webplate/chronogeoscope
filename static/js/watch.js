@@ -1,13 +1,13 @@
-var screen_width = 800;
-var screen_height = 600;
+var screen_width = 598;
+var screen_height = 598;
 var map_h = 530;
 var map_w = 530;
 var frame_h = 598;
 var frame_w = 598;
 var ticker_w = 37;
-var ticker_h = 265;
-var ticker_pivot_x = 18;
-var ticker_pivot_y = 247;
+var ticker_h = 261;
+var ticker_pivot_x = 19;
+var ticker_pivot_y = ticker_h - ticker_pivot_x;
 var spot_color = 0xFF0B0B;
 
 //~ var def_lat = 46;//france
@@ -105,13 +105,19 @@ if ("geolocation" in navigator) {
 function get_position() {
     var lat = document.getElementById("latitude").value;
     var long = document.getElementById("longitude").value;
+    if (lat > 90) {
+        lat = 90;
+    } else if (lat < -90) {
+        lat = -90;
+    }
+    set_position(lat, long);
     load_position(lat, long);
 }
 
 // set html form with active coordinates
 function set_position(latitude, longitude) {
     document.getElementById("latitude").value = latitude;
-    long = document.getElementById("longitude").value = longitude;
+    document.getElementById("longitude").value = longitude;
 }
 
 // set time display
@@ -127,12 +133,18 @@ load_position(def_lat, def_long);
 function animate() {    
     // create time representation
     var date = new Date();
-    var seconds = Math.round(date.getTime()/1000);
+    var seconds = Math.round(date.getTime()/1000.0);
+    
+    // calculate analogic time
+    var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
+    var angle = aHour / 24. * 2 * Math.PI;
+    //~ console.log(angle);
+    
     // update every second only
     if (app_time <  seconds) {
         app_time = seconds;
         //rotate the container!
-        container.rotation += 0.01;
+        container.rotation = angle;
         // update time display
         set_time(date);
         // render the root container
@@ -144,7 +156,7 @@ function animate() {
 
 // set application time for loop control
 var date = new Date();
-var app_time = Math.round(date.getTime()/1000);
+var app_time = Math.round(date.getTime()/1000.0);
 
 // start animating
 animate();
