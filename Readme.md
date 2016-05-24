@@ -11,16 +11,21 @@ or for debug:
 
     python server.py
 
-Then visit : http://localhost:5005
+Then visit :
+
+    http://localhost:5005
 
 Dependencies :
+
      - Python
      - Flask (pip install Flask)
      - pixi.js (included)
 
 
 Tested browsers :
+
     - Firefox 46
     - Chromium 50
+
 It should work on any modern html5 browsers !
 Faster if webGL enabled.
