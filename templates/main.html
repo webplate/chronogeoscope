@@ -11,6 +11,23 @@
 <body>
     <div class="center">
     </div>
+    <div class="center">
+        <p>
+            Coordinated Universal Time : <span id="time"></span>
+        </p>
+        <form action="javascript:get_position()">
+            <p>
+                <label for="latitude">Latitude :</label>
+                <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
+                
+                <label for="longitude">Longitude :</label>
+                <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
+            </p>
+
+            <input class="btn btn-primary" type="submit" value="Send Coordinates" />
+        
+        </form>
+    </div>
 </body>
 <script src="/static/js/watch.js"></script>
 </html> 
