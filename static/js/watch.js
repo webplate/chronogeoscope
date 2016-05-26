@@ -8,24 +8,22 @@ var ticker_w = 43;
 var ticker_h = 297;
 var ticker_pivot_x = ticker_w/2;
 var ticker_pivot_y = ticker_h - ticker_pivot_x;
+var local_ticker_pivot_x = 9;
+var local_ticker_pivot_y = 286;
 var spot_color = 0xFF0B0B;
 
 //~ var def_lat = 46;//france
 //~ var def_long = 2;
-
-
 //~ var def_lat = -90;//south pole
 //~ var def_long = 0;
-
-//~ var def_lat = 90;
+//~ var def_lat = 90;//north pole
 //~ var def_long = 180;
-
-var def_lat = 8.8;//point india
-var def_long = 77.3;
-
-
-//~ var def_lat = 71;
-//~ var def_long = 27;//point norvege
+//~ var def_lat = 8.8;//point india
+//~ var def_long = 77.3;
+//~ var def_lat = 71;//point norvege
+//~ var def_long = 27;
+var def_lat = 0;//origin
+var def_long = 0;
 
 // create the main pixi renderer
 var renderer = PIXI.autoDetectRenderer(screen_width, screen_height,{transparent: true});
@@ -65,6 +63,15 @@ spot.pivot.y = 0;
 spot.x = map_w/2;
 spot.y = map_h/2;
 container.addChild(spot);
+
+// draw local time ticker
+var local_ticker = PIXI.Sprite.fromImage('static/img/localticker.png');
+//~ ticker.alpha = 0.5;
+local_ticker.pivot.x = local_ticker_pivot_x;
+local_ticker.pivot.y = local_ticker_pivot_y;
+local_ticker.x = screen_width/2 ;
+local_ticker.y = screen_height/2 ;
+stage.addChild(local_ticker);
 
 //draw frame
 var frame = PIXI.Sprite.fromImage('static/img/frame.png');
@@ -124,6 +131,8 @@ function set_position(latitude, longitude) {
 function set_time(date) {
     var span = document.getElementById("time");
     span.innerText = date.toUTCString();
+    var span = document.getElementById("local_time");
+    span.innerText = date.toString();
 }
 
 // set default position
@@ -138,11 +147,17 @@ function animate() {
     // update every second only
     if (app_time <  seconds) {
         app_time = seconds;
-        // calculate analogic time
+        // calculate analogic UTC time
         var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
         var angle = aHour / 24. * 2 * Math.PI;
         //rotate the container!
         container.rotation = angle;
+        // calculate analogic local time
+        var aHour = date.getHours() + date.getMinutes()/60.0 + date.getSeconds()/3600.0;
+        var angle = aHour / 24. * 2 * Math.PI;
+        //rotate the container!
+        local_ticker.rotation = angle;
+        
         // update time display
         set_time(date);
         // render the root container
