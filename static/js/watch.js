@@ -40,13 +40,13 @@ var container = new PIXI.Container();
 stage.addChild(container);
 
 // draw map
-var map = PIXI.Sprite.fromImage('/static/img/AzimuthalMapSouth.png');
+var map = PIXI.Sprite.fromImage('static/img/AzimuthalMapSouth.png');
 map.x = 0;
 map.y = 0;
 container.addChild(map);
 
 // draw ticker
-var ticker = PIXI.Sprite.fromImage('/static/img/stick.png');
+var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
 //~ ticker.alpha = 0.5;
 ticker.pivot.x = ticker_pivot_x;
 ticker.pivot.y = ticker_pivot_y;
@@ -67,7 +67,7 @@ spot.y = map_h/2;
 container.addChild(spot);
 
 //draw frame
-var frame = PIXI.Sprite.fromImage('/static/img/frame.png');
+var frame = PIXI.Sprite.fromImage('static/img/frame.png');
 //~ frame.alpha = 0.5;
 frame.x = screen_width/2 - frame_w/2;
 frame.y = screen_height/2 - frame_h/2;
