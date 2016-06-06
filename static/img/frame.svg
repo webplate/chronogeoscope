@@ -21,6 +21,10 @@
    inkscape:export-ydpi="90.010345">
   <defs
      id="defs3822">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4015"
+       is_visible="true" />
     <linearGradient
        id="linearGradient4419">
       <stop
@@ -951,11 +955,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="664.17155"
-     inkscape:cy="337.41707"
+     inkscape:zoom="8"
+     inkscape:cx="401.10884"
+     inkscape:cy="336.36952"
      inkscape:document-units="px"
-     inkscape:current-layer="layer9"
+     inkscape:current-layer="layer4"
      showgrid="false"
      fit-margin-top="50"
      fit-margin-left="50"
@@ -1339,7 +1343,7 @@
      id="layer6"
      inkscape:label="frame"
      transform="translate(81.423588,82.579902)"
-     style="display:inline">
+     style="display:none">
     <path
        style="opacity:0.81449274;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.05271602;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4482);enable-background:accumulate"
        d="M 311.40625,-5.46875 C 136.65636,-3.2552637 -4.3125,139.09993 -4.3125,314.375 c 0,176.65519 143.18856,319.875 319.84375,319.875 176.65519,0 319.875,-143.21981 319.875,-319.875 0,-176.65519 -143.21981,-319.84375 -319.875,-319.84375 -1.38012,0 -2.74902,-0.017429 -4.125,0 z m 4.125,45.9375 c 151.27113,0 273.90625,122.63512 273.90625,273.90625 0,151.27113 -122.63512,273.90625 -273.90625,273.90625 C 164.26012,588.28125 41.625,465.64613 41.625,314.375 41.625,163.10387 164.26012,40.46875 315.53125,40.46875 z"
@@ -1391,7 +1395,7 @@
      id="layer3"
      inkscape:label="ticks"
      transform="translate(174.17359,175.34553)"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <path
        transform="translate(-92.75,-92.765625)"
@@ -1630,10 +1634,11 @@
   <g
      inkscape:groupmode="layer"
      id="layer9"
-     inkscape:label="numbers">
+     inkscape:label="numbers"
+     style="display:none">
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#e5e5e5;font-family:Museo;-inkscape-font-specification:Museo;stroke-opacity:1;filter:url(#filter4994-3-0);text-indent:0;text-align:start;text-decoration:none;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-0);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo"
        x="383.7298"
        y="100.8804"
        id="text5017"
@@ -1642,10 +1647,10 @@
          id="tspan5019"
          x="383.7298"
          y="100.8804"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Museo;-inkscape-font-specification:Museo;stroke:#e5e5e5;stroke-opacity:1;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-0);enable-background:accumulate">0</tspan></text>
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-0);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo">0</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-4);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-4);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo"
        x="693.84332"
        y="410.72186"
        id="text5021"
@@ -1656,7 +1661,7 @@
          y="410.72186">6</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-0);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3-0);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo"
        x="374.5"
        y="719.40875"
        id="text5025"
@@ -1667,7 +1672,7 @@
          y="719.40875">12</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter4994-3)"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#e5e5e5;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994-3);enable-background:accumulate;font-family:Museo;-inkscape-font-specification:Museo"
        x="66.469673"
        y="409.15765"
        id="text5029"
@@ -1701,6 +1706,19 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc"
        inkscape:export-filename="/home/g/dev/aziclock/static/img/stick.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="localticker"
+     style="display:inline">
+    <path
+       style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4994);enable-background:accumulate"
+       d="M 397 142.5 L 396.96875 142.53125 L 396.96875 142.5625 L 389.3125 155.78125 L 395.46875 155.78125 L 395.46875 392.4375 C 393.5599 393.06832 392.15625 394.84846 392.15625 396.96875 C 392.15625 399.09084 393.55738 400.87063 395.46875 401.5 L 395.46875 447.21875 L 388.03125 454.65625 L 388.03125 462.8125 L 396.96875 453.875 L 396.96875 452.90625 C 397.03271 452.90625 397.09276 452.90434 397.15625 452.90625 L 397.15625 453.875 L 406.09375 462.8125 L 406.09375 454.65625 L 398.46875 447.03125 L 398.46875 401.5 C 400.37141 400.86564 401.75 399.08463 401.75 396.96875 C 401.75 394.85492 400.36854 393.07348 398.46875 392.4375 L 398.46875 155.84375 L 404.625 155.84375 L 397 142.59375 L 397 142.5 z "
+       id="path4011"
+       inkscape:export-filename="/home/g/dev/aziclock/static/img/localticker.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>
