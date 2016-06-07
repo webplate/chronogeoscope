@@ -14,8 +14,8 @@ var SPOT_COLOR = 0xFF0B0B;
 
 //~ var GRID_RES = MAP_W / 48;
 //~ var GRID_W = 8;
-var GRID_RES = MAP_W / 128;
-var GRID_W = 4;
+var GRID_RES = MAP_W / 256;
+var GRID_W = 2;
 //origin
 var DEF_LAT = 0;
 var DEF_LON = 0;
@@ -54,7 +54,7 @@ var shadow = new PIXI.Graphics();
 shadow.lineStyle(0);
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
-//~ shadow.alpha = 0.2;
+shadow.alpha = 0.05;
 //~ shadow.filters = [blurFilter];
 stage.addChild(shadow);
 
@@ -108,37 +108,6 @@ container.position.y = SCREEN_HEIGHT/2;
 // pivot around center
 container.pivot.x = MAP_W/2;
 container.pivot.y = MAP_H/2;
-
-//
-// HTML interaction
-//
-
-// use position from form
-function get_position() {
-    var lat = document.getElementById("latitude").value;
-    var lon = document.getElementById("longitude").value;
-    if (lat > 90) {
-        lat = 90;
-    } else if (lat < -90) {
-        lat = -90;
-    }
-    set_position(lat, lon);
-    load_position(lat, lon);
-}
-
-// set html form with active coordinates
-function set_position(latitude, longitude) {
-    document.getElementById("latitude").value = latitude;
-    document.getElementById("longitude").value = longitude;
-}
-
-// set time display
-function update_time_display(date) {
-    var span = document.getElementById("time");
-    span.innerText = date.toUTCString();
-    var span = document.getElementById("local_time");
-    span.innerText = date.toString();
-}
 
 function animate() {    
     // create time representation
