@@ -16,9 +16,13 @@ var SPOT_COLOR = 0xFF0B0B;
 //~ var GRID_W = 8;
 var GRID_RES = MAP_W / 128;
 var GRID_W = 4;
-
-var DEF_LAT = 0;//origin
+//origin
+var DEF_LAT = 0;
 var DEF_LON = 0;
+// animation delays in seconds
+var PAGE_DELAY = 0.5;
+var TICK_DELAY = 10;
+var SHADOW_DELAY = 60*30;
 
 var REAL_TIME = false;
 var NOWEBGL = false;
@@ -53,6 +57,13 @@ shadow.pivot.y = 0;
 //~ shadow.alpha = 0.2;
 //~ shadow.filters = [blurFilter];
 stage.addChild(shadow);
+
+// draw shadow line
+var shadowLine = new PIXI.Graphics();
+shadowLine.lineStyle(0);
+shadowLine.pivot.x = 0;
+shadowLine.pivot.y = 0;
+stage.addChild(shadowLine);
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
@@ -91,14 +102,6 @@ frame.x = SCREEN_WIDTH/2 - FRAME_W/2;
 frame.y = SCREEN_HEIGHT/2 - FRAME_H/2;
 stage.addChild(frame);
 
-
-// draw shadow line
-var shadowLine = new PIXI.Graphics();
-shadowLine.lineStyle(0);
-shadowLine.pivot.x = 0;
-shadowLine.pivot.y = 0;
-stage.addChild(shadowLine);
-
 // move container to the center
 container.position.x = SCREEN_WIDTH/2;
 container.position.y = SCREEN_HEIGHT/2;
@@ -106,19 +109,10 @@ container.position.y = SCREEN_HEIGHT/2;
 container.pivot.x = MAP_W/2;
 container.pivot.y = MAP_H/2;
 
-// set clock according to position
-function load_position(latitude, longitude) {
-    // rotate ticker
-    rad_lon = longitude * Math.PI/180;
-    ticker.rotation = rad_lon;
-    // place local position spot
-    var r = (MAP_W/4)/90 * latitude + MAP_W/4;
-    x = r * Math.cos(rad_lon - Math.PI/2);
-    y = r * Math.sin(rad_lon - Math.PI/2);
-    spot.x = MAP_W/2 + x;
-    spot.y = MAP_H/2 + y;
-    set_position(latitude, longitude);
-}
+//
+// HTML interaction
+//
+
 // use position from form
 function get_position() {
     var lat = document.getElementById("latitude").value;
@@ -139,144 +133,34 @@ function set_position(latitude, longitude) {
 }
 
 // set time display
-function set_time(date) {
+function update_time_display(date) {
     var span = document.getElementById("time");
     span.innerText = date.toUTCString();
     var span = document.getElementById("local_time");
     span.innerText = date.toString();
 }
 
-function get_cart(lat, lon) { 
-    //~ get cartesian coordinates from spherical coordinates
-    var x = Math.sin(lat) * Math.cos(lon);
-    var y = Math.sin(lat) * Math.sin(lon);
-    var z = Math.cos(lat);
-    return [x, y, z];
-}
-
-//~ get rotated coordinates
-function tilt_cart(x, y, z, tilt) {
-    //~ along x axis of tilt radians
-    var x2 = x;
-    var y2 = y * Math.cos(tilt) + z * Math.sin(tilt);
-    var z2 = -Math.sin(tilt) * y + z * Math.cos(tilt);
-    return [x2, y2, z2];
-}
-
-//~ get cartesian coordinates from spherical coordinates
-//~ after applying a rotation of the base around x axis of tilt radians
-function get_tilt_cart(lat, lon, tilt) {
-    var coo = get_cart(lat, lon);
-    var coo2 = tilt_cart(coo[0], coo[1], coo[2], tilt);
-    return [coo2[0], coo2[1], coo2[2]];
-}
-
-//~ return sperical coordinates from cartesian
-function get_spher(x, y, z) {
-    var lon = Math.atan2(y, x);
-    var lat = Math.acos(z);
-    return [lat, lon];
-}
-
-//~ return coord on azimuthal map
-function get_azi_coord(lat, lon) {
-    var r = (MAP_W/4)/(Math.PI/2) * lat;
-    var x = r * Math.cos(lon);
-    var y = r * Math.sin(lon);
-    return [x, y];
-}
-
-function azi_to_spher(x, y) {
-    var x = x - MAP_W/2;
-    var y = y - MAP_W/2;
-    var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    var lon = Math.acos(y / r);
-    var lat = r/(MAP_W/2) * Math.PI;
-    return [lat, lon];
-}
-
-// give the sun angle with earth equatorial plane
-function get_sun_tilt(date) {
-    // approximate current day of year
-    var day_of_year = date.getUTCDate() + date.getUTCMonth() * 30.44;
-    // the tilt between earth and sun
-    // (23.5° and summer solstice on the 172nd day)
-    var observable_tilt = 23.5*Math.cos(((2*Math.PI)/365)*(day_of_year - 172));
-    // in radians
-    observable_tilt = 2*Math.PI*(observable_tilt/360.);
-    return observable_tilt;
-    //~ return 0;
-    //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
-    //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
-}
-
-//~ draw the zone of earth self-shadowing
-function update_shadow_grid(date) {
-    // sun tilt according to season
-    var tilt = get_sun_tilt(date);
-    // sun direction vector
-    var sd = Vector.create([Math.cos(tilt),0 , -Math.sin(tilt)]);
-    // clear previous and draw shadow
-    shadow.clear();
-    shadow.beginFill(0x000000);
-    for (xa = 0; xa <= MAP_W; xa = xa + GRID_RES) {
-        for (ya = 0; ya <= MAP_H; ya = ya + GRID_RES) {
-            coo = azi_to_spher(xa, ya);
-            cart = get_cart(coo[0], coo[1]);
-            var p = Vector.create([cart[0], cart[1], cart[2]]);
-            var illu = sd.dot(p);
-            if (coo[0] < Math.PI + Math.PI/64 && illu < 0) {
-                shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
-            }
-        }
-    }    
-    shadow.endFill();
-}
-
-function update_shadow_line(date) {
-    // sun tilt according to season
-    var tilt = get_sun_tilt(date);
-    // tilted circle projection
-    shadowLine.clear();
-    shadowLine.beginFill(0x000000);
-    // first run for init
-    for (lon = -Math.PI; lon < Math.PI; lon = lon + SHADOW_RES) {
-        // compute coordinates on tilted great circle
-        var coo = get_tilt_cart(Math.PI / 2, lon, tilt + Math.PI/2);
-        var coo_sph = get_spher(coo[0], coo[1], coo[2]);
-        var coo_azi = get_azi_coord(coo_sph[0], coo_sph[1]);        
-        // draw circle projection point
-        var x = SCREEN_WIDTH/2 + coo_azi[0];
-        var y = SCREEN_HEIGHT/2 + coo_azi[1];
-        shadowLine.drawCircle(x, y, 3);
-    }
-    shadowLine.endFill();
-}
-
-
-
 function animate() {    
     // create time representation
     var date = new Date();
-    var seconds = Math.round(date.getTime()/1000.0);
+    var curr_time = Math.round(date.getTime()/1000.0);
     
-    // update every second only
-    if (REAL_TIME || app_time <  seconds) {
-        app_time = seconds;
-        // calculate analogic UTC time
-        var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
-        var angle = aHour / 24. * 2 * Math.PI;
-        //rotate the container!
-        container.rotation = angle;
-        // calculate analogic local time
-        var aHour = date.getHours() + date.getMinutes()/60.0 + date.getSeconds()/3600.0;
-        var angle = aHour / 24. * 2 * Math.PI;
-        //rotate the container!
-        local_ticker.rotation = angle;
+    // update display every second only
+    if (REAL_TIME || curr_time > flip_page + PAGE_DELAY) {
+        flip_page = curr_time;
+        if (curr_time > flip_tick + TICK_DELAY) {
+            flip_tick = curr_time;
+            // rotate tickers
+            update_tickers(date);
+        }
+        if (curr_time > flip_shadow + SHADOW_DELAY) {
+            flip_shadow = curr_time;
+            // compute earth self-shadowing
+            update_shadow_grid(date);
+        }
         // update time display
-        set_time(date);
-        // compute earth self-shadowing
-        update_shadow_grid(date);
+        update_time_display(date);
+        
         // render the root container
         renderer.render(stage);
     }
@@ -291,9 +175,9 @@ if ("geolocation" in navigator) {
 }
 // set default position
 load_position(DEF_LAT, DEF_LON);
-// set application time for loop control
-var date = new Date();
-var app_time = Math.round(date.getTime()/1000.0);
 
+var flip_page = 0;
+var flip_tick = 0;
+var flip_shadow = 0;
 // start animating
 animate();
