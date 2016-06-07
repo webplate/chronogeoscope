@@ -22,7 +22,8 @@ function update_tickers(date) {
     var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
     var angle = aHour / 24. * 2 * Math.PI;
     //rotate the container
-    container.rotation = angle;
+    back_cont.rotation = angle;
+    front_cont.rotation = angle;
     // calculate analogic local time
     var aHour = date.getHours() + date.getMinutes()/60.0 + date.getSeconds()/3600.0;
     var angle = aHour / 24. * 2 * Math.PI;
@@ -39,8 +40,8 @@ function get_sun_tilt(date) {
     var observable_tilt = 23.5*Math.cos(((2*Math.PI)/365)*(day_of_year - 172));
     // in radians
     observable_tilt = 2*Math.PI*(observable_tilt/360.);
-    return observable_tilt;
-    //~ return 0;
+    //~ return observable_tilt;
+    return -0.1;
     //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
     //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
 }
@@ -53,15 +54,20 @@ function update_shadow_grid(date) {
     var sd = Vector.create([Math.cos(tilt),0 , -Math.sin(tilt)]);
     // clear previous and draw shadow
     shadow.clear();
-    shadow.beginFill(0x000000);
     for (xa = 0; xa <= MAP_W; xa = xa + GRID_RES) {
         for (ya = 0; ya <= MAP_H; ya = ya + GRID_RES) {
             coo = azi_to_spher(xa, ya);
             cart = get_cart(coo[0], coo[1]);
             var p = Vector.create([cart[0], cart[1], cart[2]]);
             var illu = sd.dot(p);
-            if (coo[0] < Math.PI + Math.PI/64 && illu < 0) {
-                shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
+            if (coo[0] < Math.PI + Math.PI/64) {
+                if (illu < 0) {
+                    shadow.beginFill(0x000000);
+                    shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
+                } else if (illu > 0.3) {
+                    shadow.beginFill(0xFFFFFF);
+                    shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
+                }
             }
         }
     }    

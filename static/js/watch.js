@@ -1,16 +1,19 @@
 var SCREEN_WIDTH = 794;
 var SCREEN_HEIGHT = SCREEN_WIDTH;
-var MAP_H = 530;
+var MAP_H = 533;
 var MAP_W = MAP_H;
 var FRAME_H = SCREEN_HEIGHT;
 var FRAME_W = FRAME_H;
-var TICKER_W = 41;
-var TICKER_H = 302;
+var TICKER_W = 20;
+var TICKER_H = 291;
 var TICKER_PIVOT_X = TICKER_W/2;
 var TICKER_PIVOT_Y = TICKER_H - TICKER_PIVOT_X;
-var LOCAL_TICKER_PIVOT_X = 9;
-var LOCAL_TICKER_PIVOT_Y = 280;
+var LOCAL_TICKER_w = 17;
+var LOCAL_TICKER_H = 289;
+var LOCAL_TICKER_PIVOT_X = LOCAL_TICKER_w/2;
+var LOCAL_TICKER_PIVOT_Y = LOCAL_TICKER_H - LOCAL_TICKER_PIVOT_X;
 var SPOT_COLOR = 0xFF0B0B;
+var SHADOW_ALPHA = 0.05;
 
 //~ var GRID_RES = MAP_W / 48;
 //~ var GRID_W = 8;
@@ -34,16 +37,14 @@ var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent:
 var div = document.body.getElementsByClassName("center")[0];
 div.appendChild(renderer.view);
 
-// create the root of the scene graph
-var stage = new PIXI.Container();
-var container = new PIXI.Container();
-stage.addChild(container);
+//
+// Display objects
+//
 
 // draw map
-var map = PIXI.Sprite.fromImage('static/img/AzimuthalMapSouth.png');
+var map = PIXI.Sprite.fromImage('static/img/map.png');
 map.x = 0;
 map.y = 0;
-container.addChild(map);
 
 // blur filter for shadow
 var blurFilter = new PIXI.filters.BlurFilter();
@@ -54,25 +55,16 @@ var shadow = new PIXI.Graphics();
 shadow.lineStyle(0);
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
-shadow.alpha = 0.05;
+shadow.alpha = SHADOW_ALPHA;
+shadow.blendMode = PIXI.BLEND_MODES.LUMINOSITY
 //~ shadow.filters = [blurFilter];
-stage.addChild(shadow);
-
-// draw shadow line
-var shadowLine = new PIXI.Graphics();
-shadowLine.lineStyle(0);
-shadowLine.pivot.x = 0;
-shadowLine.pivot.y = 0;
-stage.addChild(shadowLine);
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
-//~ ticker.alpha = 0.5;
 ticker.pivot.x = TICKER_PIVOT_X;
 ticker.pivot.y = TICKER_PIVOT_Y;
 ticker.x = MAP_W/2 ;
 ticker.y = MAP_H/2 ;
-container.addChild(ticker);
 
 // draw a circle to indicate location
 var spot = new PIXI.Graphics();
@@ -84,30 +76,62 @@ spot.pivot.x = 0;
 spot.pivot.y = 0;
 spot.x = MAP_W/2;
 spot.y = MAP_H/2;
-container.addChild(spot);
 
 // draw local time ticker
 var local_ticker = PIXI.Sprite.fromImage('static/img/localticker.png');
-//~ ticker.alpha = 0.5;
 local_ticker.pivot.x = LOCAL_TICKER_PIVOT_X;
 local_ticker.pivot.y = LOCAL_TICKER_PIVOT_Y;
 local_ticker.x = SCREEN_WIDTH/2 ;
 local_ticker.y = SCREEN_HEIGHT/2 ;
-stage.addChild(local_ticker);
 
 //draw frame
 var frame = PIXI.Sprite.fromImage('static/img/frame.png');
-//~ frame.alpha = 0.5;
 frame.x = SCREEN_WIDTH/2 - FRAME_W/2;
 frame.y = SCREEN_HEIGHT/2 - FRAME_H/2;
-stage.addChild(frame);
 
+// draw shadow line
+var shadowLine = new PIXI.Graphics();
+shadowLine.lineStyle(0);
+shadowLine.pivot.x = 0;
+shadowLine.pivot.y = 0;
+
+//
+// Scene Graph
+//
+
+// create the root of the scene graph
+var stage = new PIXI.Container();
+
+// background container
+var back_cont = new PIXI.Container();
 // move container to the center
-container.position.x = SCREEN_WIDTH/2;
-container.position.y = SCREEN_HEIGHT/2;
+back_cont.position.x = SCREEN_WIDTH/2;
+back_cont.position.y = SCREEN_HEIGHT/2;
 // pivot around center
-container.pivot.x = MAP_W/2;
-container.pivot.y = MAP_H/2;
+back_cont.pivot.x = MAP_W/2;
+back_cont.pivot.y = MAP_H/2;
+
+// front contaner
+var front_cont = new PIXI.Container();
+front_cont.position.x = SCREEN_WIDTH/2;
+front_cont.position.y = SCREEN_HEIGHT/2;
+front_cont.pivot.x = MAP_W/2;
+front_cont.pivot.y = MAP_H/2;
+
+// setup drawing z-order
+back_cont.addChild(map);
+stage.addChild(back_cont);
+stage.addChild(shadow);
+front_cont.addChild(spot);
+front_cont.addChild(ticker);
+stage.addChild(front_cont);
+stage.addChild(local_ticker);
+stage.addChild(frame);
+//~ stage.addChild(shadowLine);
+
+//
+// Main Loop
+//
 
 function animate() {    
     // create time representation
