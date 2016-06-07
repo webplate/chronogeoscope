@@ -11,14 +11,20 @@ var TICKER_PIVOT_Y = TICKER_H - TICKER_PIVOT_X;
 var LOCAL_TICKER_PIVOT_X = 9;
 var LOCAL_TICKER_PIVOT_Y = 280;
 var SPOT_COLOR = 0xFF0B0B;
-var SHADOW_RES = Math.PI/64;
-var SHADOW_CORREC_LIMIT = Math.PI/32;
+
+//~ var GRID_RES = MAP_W / 48;
+//~ var GRID_W = 8;
+var GRID_RES = MAP_W / 128;
+var GRID_W = 4;
+
 var DEF_LAT = 0;//origin
 var DEF_LON = 0;
-var REAL_TIME = true;
+
+var REAL_TIME = false;
+var NOWEBGL = false;
 
 // create the main pixi renderer
-var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true});
+var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true}, noWebGl = NOWEBGL);
 
 // add pixi surface to centered div
 var div = document.body.getElementsByClassName("center")[0];
@@ -44,23 +50,9 @@ var shadow = new PIXI.Graphics();
 shadow.lineStyle(0);
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
-shadow.filters = [blurFilter];
+//~ shadow.alpha = 0.2;
+//~ shadow.filters = [blurFilter];
 stage.addChild(shadow);
-
-// draw external circle
-var shadowExt = new PIXI.Graphics();
-shadowExt.lineStyle(0);
-shadowExt.pivot.x = 0;
-shadowExt.pivot.y = 0;
-stage.addChild(shadowExt);
-
-// draw high latitude correction
-var shadowHigh = new PIXI.Graphics();
-shadowHigh.lineStyle(0);
-shadowHigh.pivot.x = 0;
-shadowHigh.pivot.y = 0;
-shadowHigh.filters = [blurFilter];
-stage.addChild(shadowHigh);
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
@@ -100,12 +92,12 @@ frame.y = SCREEN_HEIGHT/2 - FRAME_H/2;
 stage.addChild(frame);
 
 
-// draw shadow points (debug)
-var shadowP = new PIXI.Graphics();
-shadowP.lineStyle(0);
-shadowP.pivot.x = 0;
-shadowP.pivot.y = 0;
-stage.addChild(shadowP);
+// draw shadow line
+var shadowLine = new PIXI.Graphics();
+shadowLine.lineStyle(0);
+shadowLine.pivot.x = 0;
+shadowLine.pivot.y = 0;
+stage.addChild(shadowLine);
 
 // move container to the center
 container.position.x = SCREEN_WIDTH/2;
@@ -120,7 +112,7 @@ function load_position(latitude, longitude) {
     rad_lon = longitude * Math.PI/180;
     ticker.rotation = rad_lon;
     // place local position spot
-    var r = (MAP_W/4)/90 * latitude + MAP_W/4 ;
+    var r = (MAP_W/4)/90 * latitude + MAP_W/4;
     x = r * Math.cos(rad_lon - Math.PI/2);
     y = r * Math.sin(rad_lon - Math.PI/2);
     spot.x = MAP_W/2 + x;
@@ -194,6 +186,15 @@ function get_azi_coord(lat, lon) {
     return [x, y];
 }
 
+function azi_to_spher(x, y) {
+    var x = x - MAP_W/2;
+    var y = y - MAP_W/2;
+    var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    var lon = Math.acos(y / r);
+    var lat = r/(MAP_W/2) * Math.PI;
+    return [lat, lon];
+}
+
 // give the sun angle with earth equatorial plane
 function get_sun_tilt(date) {
     // approximate current day of year
@@ -203,117 +204,56 @@ function get_sun_tilt(date) {
     var observable_tilt = 23.5*Math.cos(((2*Math.PI)/365)*(day_of_year - 172));
     // in radians
     observable_tilt = 2*Math.PI*(observable_tilt/360.);
-    //~ return observable_tilt;
-    //~ return SUNTILT;
+    return observable_tilt;
+    //~ return 0;
     //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
-    return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/1000);
+    //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
 }
 
-//~ draw the limit of earth self-shadowing
-// composed of a projected tilted circle, an outer circle and
-// an arc correcting high latitude distortions
-function update_shadow(date) {
+//~ draw the zone of earth self-shadowing
+function update_shadow_grid(date) {
     // sun tilt according to season
-    var tilt = get_sun_tilt(date) + Math.PI / 2;
+    var tilt = get_sun_tilt(date);
+    // sun direction vector
+    var sd = Vector.create([Math.cos(tilt),0 , -Math.sin(tilt)]);
     // clear previous and draw shadow
     shadow.clear();
-    shadow.beginFill(0x000000, 1);
-    shadowP.clear();
-    shadowP.beginFill(0x000000);
-    shadowExt.clear();
-    shadowExt.beginFill(0x000000);
-    shadowHigh.clear();
-    shadowHigh.beginFill(0x000000);
-    // correction latitude
-    var arc_lat_max = 0;
-    var arc_lat_min = 0;
-    var arc_lon = 0;
+    shadow.beginFill(0x000000);
+    for (xa = 0; xa <= MAP_W; xa = xa + GRID_RES) {
+        for (ya = 0; ya <= MAP_H; ya = ya + GRID_RES) {
+            coo = azi_to_spher(xa, ya);
+            cart = get_cart(coo[0], coo[1]);
+            var p = Vector.create([cart[0], cart[1], cart[2]]);
+            var illu = sd.dot(p);
+            if (coo[0] < Math.PI + Math.PI/64 && illu < 0) {
+                shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
+            }
+        }
+    }    
+    shadow.endFill();
+}
+
+function update_shadow_line(date) {
+    // sun tilt according to season
+    var tilt = get_sun_tilt(date);
+    // tilted circle projection
+    shadowLine.clear();
+    shadowLine.beginFill(0x000000);
     // first run for init
-    var first_run = true;
-    var first_run2 = true;
-    var first_run3 = true;
     for (lon = -Math.PI; lon < Math.PI; lon = lon + SHADOW_RES) {
         // compute coordinates on tilted great circle
-        var coo = get_tilt_cart(Math.PI / 2, lon, tilt);
+        var coo = get_tilt_cart(Math.PI / 2, lon, tilt + Math.PI/2);
         var coo_sph = get_spher(coo[0], coo[1], coo[2]);
-        var coo_azi = get_azi_coord(coo_sph[0], coo_sph[1]);
-        // select strategy of drawing (depend on winter summer)
-        if (tilt < Math.PI/2) {
-            // draw external shadow
-            var r = MAP_W/2 ;
-            var x = r * Math.cos(lon);
-            var y = r * Math.sin(lon);
-            x = SCREEN_WIDTH/2 + x;
-            y = SCREEN_HEIGHT/2 + y;
-            if (first_run) {
-                first_run = false;
-                shadowExt.moveTo(x, y);
-            } else {
-                shadowExt.lineTo(x, y);
-            }
-            //~ shadowExt.drawCircle(x, y, 3);
-        }
-        // and prepare correction of distortions on high latitude
-        if (coo_sph[0] > arc_lat_max) { 
-            arc_lat_max = coo_sph[0];
-            var coo_arc = get_tilt_cart(Math.PI / 2, lon - 2 * SHADOW_RES, tilt);
-            var coo_sph_arc = get_spher(coo_arc[0], coo_arc[1], coo_arc[2]);
-            arc_lon = Math.abs(coo_sph_arc[1] - Math.PI/2);
-            arc_lat_min =  coo_sph_arc[0];
-        }        
+        var coo_azi = get_azi_coord(coo_sph[0], coo_sph[1]);        
         // draw circle projection point
         var x = SCREEN_WIDTH/2 + coo_azi[0];
         var y = SCREEN_HEIGHT/2 + coo_azi[1];
-        if (first_run2) {
-            first_run2 = false;
-            shadow.moveTo(x, y);
-        } else {
-            shadow.lineTo(x, y);
-        }
-        //~ shadowP.drawCircle(x, y, 3);
+        shadowLine.drawCircle(x, y, 3);
     }
-    // draw shadow correction
-    
-    if (arc_lat_max > 0) {
-        if (tilt > Math.PI/2) {
-            var lon_offset = -Math.PI/2;
-            var start = arc_lon - Math.PI;
-            var stop = -arc_lon + Math.PI;
-        } else {
-            var lon_offset = Math.PI/2;
-            var start = -arc_lon;
-            var stop = arc_lon;
-        }
-        var m = (stop - start) / 2;
-        for (lon = start; lon < stop; lon = lon + SHADOW_RES) {
-            // interpolate arc diameter
-            if (lon < start + m) {
-                var a = (arc_lat_max - arc_lat_min)/m;
-                var b = arc_lat_min - a * start;
-                var corr_lat = a * lon + b;
-            } else {
-                var a = (arc_lat_min - arc_lat_max)/m;
-                var b = arc_lat_min - a * stop;
-                var corr_lat = a * lon + b;
-            }
-            //~ console.log(corr_lat, arc_lat_max, arc_lat_min);
-            coo_azi = get_azi_coord(corr_lat, lon + lon_offset);
-            x = SCREEN_WIDTH/2 + coo_azi[0];
-            y = SCREEN_HEIGHT/2 + coo_azi[1];
-            if (first_run3) {
-                first_run3 = false;
-                shadow.moveTo(x, y);
-            } else {
-                shadow.lineTo(x, y);
-            }
-            //~ shadowHigh.drawCircle(x, y, 4);
-        }
-    }
-    shadow.endFill();
-    shadow.endFill();
-    shadowExt.endFill();
-    shadowHigh.endFill();
+    shadowLine.endFill();
 }
+
+
 
 function animate() {    
     // create time representation
@@ -336,7 +276,7 @@ function animate() {
         // update time display
         set_time(date);
         // compute earth self-shadowing
-        update_shadow(date);
+        update_shadow_grid(date);
         // render the root container
         renderer.render(stage);
     }
