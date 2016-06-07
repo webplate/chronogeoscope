@@ -40,8 +40,8 @@ function get_sun_tilt(date) {
     var observable_tilt = 23.5*Math.cos(((2*Math.PI)/365)*(day_of_year - 172));
     // in radians
     observable_tilt = 2*Math.PI*(observable_tilt/360.);
-    //~ return observable_tilt;
-    return -0.1;
+    return observable_tilt;
+    //~ return -0.1;
     //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
     //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
 }

@@ -14,6 +14,7 @@ var LOCAL_TICKER_PIVOT_X = LOCAL_TICKER_w/2;
 var LOCAL_TICKER_PIVOT_Y = LOCAL_TICKER_H - LOCAL_TICKER_PIVOT_X;
 var SPOT_COLOR = 0xFF0B0B;
 var SHADOW_ALPHA = 0.05;
+var BLUR_SIZE = 8;
 
 //~ var GRID_RES = MAP_W / 48;
 //~ var GRID_W = 8;
@@ -48,7 +49,7 @@ map.y = 0;
 
 // blur filter for shadow
 var blurFilter = new PIXI.filters.BlurFilter();
-blurFilter.blur = 10;
+blurFilter.blur = BLUR_SIZE;
 
 // draw earth self shadow
 var shadow = new PIXI.Graphics();
@@ -57,7 +58,7 @@ shadow.pivot.x = 0;
 shadow.pivot.y = 0;
 shadow.alpha = SHADOW_ALPHA;
 shadow.blendMode = PIXI.BLEND_MODES.LUMINOSITY
-//~ shadow.filters = [blurFilter];
+shadow.filters = [blurFilter];
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
@@ -119,6 +120,7 @@ front_cont.pivot.x = MAP_W/2;
 front_cont.pivot.y = MAP_H/2;
 
 // setup drawing z-order
+stage.addChild(frame);
 back_cont.addChild(map);
 stage.addChild(back_cont);
 stage.addChild(shadow);
@@ -126,7 +128,6 @@ front_cont.addChild(spot);
 front_cont.addChild(ticker);
 stage.addChild(front_cont);
 stage.addChild(local_ticker);
-stage.addChild(frame);
 //~ stage.addChild(shadowLine);
 
 //
