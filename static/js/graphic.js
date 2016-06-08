@@ -41,7 +41,8 @@ function get_sun_tilt(date) {
     // in radians
     observable_tilt = 2*Math.PI*(observable_tilt/360.);
     return observable_tilt;
-    //~ return -0.1;
+    //~ return -0.1; 
+    //~ return -2*Math.PI*(23.5/360.);
     //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
     //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
 }
@@ -64,7 +65,7 @@ function update_shadow_grid(date) {
                 if (illu < 0) {
                     shadow.beginFill(0x000000);
                     shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
-                } else if (illu > 0.3) {
+                } else if (illu > 0.8) {
                     shadow.beginFill(0xFFFFFF);
                     shadow.drawCircle(xa + SCREEN_WIDTH/2 - MAP_W/2, ya + SCREEN_HEIGHT/2 - MAP_W/2, GRID_W);
                 }
