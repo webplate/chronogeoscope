@@ -35,7 +35,7 @@ var NOWEBGL = false;
 var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true}, noWebGl = NOWEBGL);
 
 // add pixi surface to centered div
-var div = document.body.getElementsByClassName("center")[0];
+var div = document.body.getElementsByClassName("clock")[0];
 div.appendChild(renderer.view);
 
 //

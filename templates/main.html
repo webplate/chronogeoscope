@@ -19,26 +19,123 @@
 
 <body>
     <div class="center">
-    </div>
-    <div class="center">
-        <p>
-            Near Solar Time : <span id="time"></span>
-        </p>
-        <p>
-            Local Time : <span id="local_time"></span>
-        </p>
-        <form action="javascript:get_position()">
-            <p>
-                <label for="latitude">Latitude :</label>
-                <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
-                
-                <label for="longitude">Longitude :</label>
-                <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
-            </p>
+        <div class="clock"></div>
+        <div class="well">
+            <p><strong>Near Solar Time :</strong></p>
+            <p class="large text-center lead"><span id="time"></span></p>
+            <p><strong>Local Time :</strong></p>
+            <p class="large text-center lead"><span id="local_time"></span></p>
+        </div>
+        <div class="well">
+            <form action="javascript:get_position()">
+                <p>
+                    <label for="latitude">Latitude :</label>
+                    <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
+                    
+                    <label for="longitude">Longitude :</label>
+                    <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
+                </p>
 
-            <input class="btn btn-primary" type="submit" value="Send Coordinates" />
-        
-        </form>
+                <input class="btn btn-primary" type="submit" value="Send Coordinates" />
+            
+            </form>
+        </div>
+        <div clas="panel panel-default">
+            <div class="well">
+        <h1>The TisP Watch</h1>
+
+<p>by Roberto Casati and Glen Lomax</p>
+
+<p>Institut Jean Nicod, CNRS-EHESS-ENS</p>
+
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a></p>
+
+<h2>What is Time-is-Place Watch?</h2>
+
+<p class="lead">The TISP Watch is an educational software that makes it possible to study the conceptual tie between time and place in a watch. The idea: Your location on a map of the Earth provides the hour hand of 24 hour clock. By reading the number on the hour ring corresponding to your location, you know what the solar time of your location is. So you are not actually using a clock, but a model of the Earth's rotation, in order to get an idea of the current time.</p>
+
+
+<h2>Why use this particular type of representation?</h2>
+
+<p class="lead">We wanted to show that hidden in each watch's face there is an implicit image of the Earth's spin. The Earth is its own clock!</p>
+
+<h2>How did we do it?</h2>
+
+
+<p>We divided the time on the watch's face not in 12, but in 24 hours. We then turned the clock's face into a representation of the Earth centered on the South Pole. This way the Earth's map rotates the way the Earth does (seen from above the South Pole, the rotation is clockwise.) Then we set the period of the rotating map's spin: 24 hours exactly. If you are patient enough, you will see that the map gently rotates.</p>
+
+<p>At this point, the key idea is to find your location on the map. This is done either by entering the location directly in the Latitude and Longitude boxes, or by allowing the software to retrieve your position. You position is then indicated by the red dot.
+</p>
+<p>Your location is the hour hand on a 24 hour-period rotating map of the world. This means that you can use space to tell the time.
+</p>
+
+<p>Here comes the important part: the way we built it, the red dot does not talk to a timepiece that tells the hour, but to a GPS that tells the place. At this point it uses a timer – not a clock – that sets the rotation at the 24 hour period.
+</p>
+
+<p>We added another hand that does take input from a real clock: whereas the red dot specified solar time, the thin hand signals the actual conventional time (for instance, this takes into account daylight savings: during the summer, you can see that real times places you to the East of your current location!)
+</p>
+
+
+
+
+<h2>Is it possible to give more details about the TisP Watch?</h2>
+
+<p>Used on Earth, a clock does not only tell the time, it also tells what meridian you are on (modulo time zones). For instance, it tells you that it is noon now. And now it is noon in Paris. Hence the clock tells you that you are on the Paris meridian. In order to draw this conclusion from the fact that is noon now, the only thing you have to know is that it is now noon in Paris.
+</p>
+
+<p>Accordingly, a clock can misinform you about your location. It tells you that it is noon now. And now it is noon in Paris. The clock tells you that you are on the Paris meridian. But you are actually in London. It is 11am in London. If at 11am you look at you clock in London and it tells that it is noon, you may philosophically claim that the clock is not misinforming you, as it is telling what time it is now in Paris. But in your less philosophical moments, you would claim that the clock is plain wrong. Because it tells you that you are on the Paris meridian, and you know you are in London.
+</p>
+
+<p>Consider a 24 hours dial. In place of the marks for 12 hours, it has marks for 24 hours. Make it a bit more complex. Instead of the hour hand, a miniature map of the globe as projected from the South pole occupies the whole of the clock's face. In the projection (an azimuthal equidistant projection), the South Pole is at the center of the face, and the North Pole is degenerately represented by the outmost circumference. Meridians are represented by straight lines, i.e. rays emanating from the center; parallels are concentric circles. The miniature map slowly revolves clockwise around the center, coming full circle in 24 hours. Abstract from time zones, with their irregular shapes and quantizing purposes.</p>
+
+<p>Have the movement set relative to a standard of time, for instance by setting 00:00 at the Greenwhich meridian. Determine where you are, and you'll know your time. Or, conversely, determine where in the world it is now the time you read on the dial, and you'll know where you are. Suppose your position is given by a GPS and translated on the revolving miniature map by a red dot. The number you'll read at the end of the meridian on which the red dot lies is your current time. Take away the map, just leaving the red dot and the meridian. This is almost an ordinary clock's hour hand. In an ordinary (24 hours) clock, you just cannot see the map behind the meridian. But the map is there – and the hand is just a meridian on that map: your meridian.</p>
+
+
+<p>
+An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. The hour hand is replaced by an indicator of the current position of the clock (the "red dot"). Centering the projection on the South Pole aligns the clockwise spin's direction of the Earth (as seen from the South Pole) with the traditional clockwise movement of the clock's hand. The picture represents two different moments, three hours apart. On the left hand side, it is 8am on (the meridian of) Australia's West Coast. On the right hand side, it is 11am. [Drawing by Author.] The same projection could be mounted on the face of an equatorial sundial set for the Southern hemisphere.</p>
+
+
+
+<p>Perfectly working clocks can fail to tell the time. If you are at the South Pole, the red dot is at the center of the clock's face. It lies on every meridian. If you are at the North Pole, the red dot spreads and occupies the outer circumference; there too it lies on every meridian. Fine enough: at the North and the South Pole it does not make sense to ask for the hour. Two travelers heading north from different starting points who meet at the North Pole could only observe the differences between the readings of their clocks. Their clocks at the poles only indicate the direction they are coming from; they only contain spatial information.
+</p>
+
+<p>A sundial whose stylus coincides with the North (or the South) Pole and is parallel to the Earth's axis just indicates where on Earth it is now midnight, by pointing its shadow towards a meridian. On each point on that meridian it is now midnight (and of course, at some of those places a midnight sun shines).
+</p>
+
+
+
+
+<h2>Disclaimer</h2>
+
+
+<p>The TisP Watch is not a measuring or a precision instrument. It is not a clock, but an approximate model of the Earth's spin. Its use is meant to be purely educational or recreational. Do not use it for telling the time, setting appointments, planning a trip to the airport etc. we cannot take any responsibility for uses that go beyond the intended educational use of the software.
+</p>
+
+
+<h2>What is a <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license?</h2>
+
+<p>A <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license allows you to do practically anything noncommercial with the idea and code of the TisP Watch, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org
+</p>
+
+<h2>Where can I find the source code?</h2>
+
+<p>Everything is published on GitHub with setup instructions to host your own or to try and improve it !</p>
+
+<p> Find it at : 
+<a class="lead" href="https://github.com/webplate/aziclock">https://github.com/webplate/aziclock</a></p>
+
+<h2>Who are we?</h2>
+
+<p>Roberto Casati is a Senior researcher with the French CNRS.</p>
+
+<p>Glen Lomax is an independent researcher and coder.</p>
+
+<p>Together, Casati and Lomax have published the open source educational software Astrini.</p>
+
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> for the TisP software and for this explanatory text.</p>
+
+        </div>
+        </div>
     </div>
     <!-- Libraries -->
     <script src="/static/js/jquery.min.js"></script>
