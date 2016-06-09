@@ -951,11 +951,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="462.40119"
-     inkscape:cy="295.12188"
+     inkscape:zoom="2"
+     inkscape:cx="436.50977"
+     inkscape:cy="286.66788"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer13"
      showgrid="false"
      fit-margin-top="50"
      fit-margin-left="50"
@@ -1001,7 +1001,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1117,7 +1117,7 @@
      id="layer5"
      inkscape:label="map"
      transform="translate(81.423588,82.579902)"
-     style="display:inline">
+     style="display:none">
     <g
        id="g4016"
        inkscape:export-filename="/home/g/dev/aziclock/static/img/map.png"
@@ -2015,7 +2015,8 @@
        id="g4283"
        inkscape:export-filename="/home/g/dev/aziclock/static/img/gmt_icon.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       style="fill:#93c3ff;fill-opacity:1">
       <rect
          ry="2.6516504"
          rx="2.7775242"
@@ -2024,12 +2025,12 @@
          height="62.031071"
          width="19.503725"
          id="rect4281"
-         style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+         style="color:#000000;fill:#93c3ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <path
          inkscape:connector-curvature="0"
          id="path4260-3"
          d="m 396.95438,423.8205 0,-60.0581"
-         style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0;display:inline" />
+         style="fill:#93c3ff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0;display:inline;fill-opacity:1" />
     </g>
   </g>
 </svg>

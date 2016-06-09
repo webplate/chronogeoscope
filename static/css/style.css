@@ -1,5 +1,6 @@
 body {
-    background-color: #888888;
+    background-image: url("../img/starry_back.jpg");
+    background-repeat: repeat;
 }
 
 .center {
