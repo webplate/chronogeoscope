@@ -7,6 +7,8 @@ function load_position(latitude, longitude) {
     // rotate ticker
     rad_lon = longitude * Math.PI/180;
     ticker.rotation = rad_lon;
+    // this angle is also the delay from GMT in milliseconds
+    SOLAR_DELAY = (rad_lon / (2 * Math.PI)) * 24 * 60 * 60 *1000 ;
     // place local position spot
     var r = (MAP_W/4)/90 * latitude + MAP_W/4;
     x = r * Math.cos(rad_lon - Math.PI/2);
@@ -41,7 +43,7 @@ function get_sun_tilt(date) {
     // in radians
     observable_tilt = 2*Math.PI*(observable_tilt/360.);
     return observable_tilt;
-    //~ return -0.1; 
+    //~ return 0; 
     //~ return -2*Math.PI*(23.5/360.);
     //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
     //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
