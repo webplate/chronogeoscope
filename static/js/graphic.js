@@ -2,19 +2,26 @@
 // Graphic functions
 //
 
+// return coords on 2D map from lat lon in degrees
+function get_azi(lat, lon) {
+    var lon = lon * Math.PI/180;
+    var r = (MAP_W/4)/90 * lat + MAP_W/4;
+    var x = r * Math.cos(lon - Math.PI/2) + MAP_W/2;
+    var y = r * Math.sin(lon - Math.PI/2) + MAP_W/2;
+    return [x, y];
+}
+
 // set clock according to position
 function load_position(latitude, longitude) {
     // rotate ticker
-    rad_lon = longitude * Math.PI/180;
+    var rad_lon = longitude * Math.PI/180;
     ticker.rotation = rad_lon;
     // this angle is also the delay from GMT in milliseconds
     SOLAR_DELAY = (rad_lon / (2 * Math.PI)) * 24 * 60 * 60 *1000 ;
     // place local position spot
-    var r = (MAP_W/4)/90 * latitude + MAP_W/4;
-    x = r * Math.cos(rad_lon - Math.PI/2);
-    y = r * Math.sin(rad_lon - Math.PI/2);
-    spot.x = MAP_W/2 + x;
-    spot.y = MAP_H/2 + y;
+    var coo = get_azi(latitude, longitude);
+    spot.x = coo[0];
+    spot.y = coo[1];
     set_position(latitude, longitude);
 }
 
@@ -95,4 +102,13 @@ function update_shadow_line(date) {
         shadowLine.drawCircle(x, y, 3);
     }
     shadowLine.endFill();
+}
+
+function draw_cities(cities) {
+    main_cities.beginFill(CITY_COLOR);
+    for (c in cities) {
+        var coo = get_azi(cities[c]["latitude"], cities[c]["longitude"]);
+        main_cities.drawCircle(coo[0], coo[1], CITY_W);
+    }
+    main_cities.endFill();
 }

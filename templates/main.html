@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Aziclock</title>
+    <title>Chronogeoscope</title>
     <!-- Libraries -->
     <script src="static/js/pixi.min.js"></script>
     <script src="static/js/sylvester.js"></script>
@@ -18,6 +18,13 @@
 </head>
 
 <body>
+    <div class="title well">
+        <h1>The Chronogeoscope <small>The earth as its own clock</small></h1>
+        <small class="credit">
+            by <a href="http://shadowes.org/">Roberto Casati</a> and Glen Lomax, 
+            Institut Jean Nicod, CNRS-EHESS-ENS, <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>
+        </small>
+    </div>
     <div class="center">
         <div class="clock"></div>
     </div>
@@ -49,21 +56,14 @@
             
             </form>
         </div>
-        <div clas="panel panel-default">
-            <div class="well">
-                
-                
-<h1>The TisP Watch</h1>
+    </div>
+        <div class="description well">
 
-<p>by Roberto Casati and Glen Lomax</p>
+<h2>What is the Chronogeoscope?</h2>
 
-<p>Institut Jean Nicod, CNRS-EHESS-ENS</p>
+<p class="lead">The Chronogeoscope is an educational software that makes it possible to study the conceptual tie between time and place in a watch.</p>
 
-<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a></p>
-
-<h2>What is Time-is-Place Watch?</h2>
-
-<p class="lead">The TISP Watch is an educational software that makes it possible to study the conceptual tie between time and place in a watch. The idea: Your location on a map of the Earth provides the hour hand of 24 hour clock. By reading the number on the hour ring corresponding to your location, you know what the solar time of your location is. So you are not actually using a clock, but a model of the Earth's rotation, in order to get an idea of the current time.</p>
+<p class="lead"><strong>The idea:</strong> Your location on a map of the Earth provides the hour hand of a 24 hour clock. By reading the number on the hour ring corresponding to your location, you know what the solar time of your location is. So you are not actually using a clock, but a model of the Earth's rotation, in order to get an idea of the current time.</p>
 
 <h2>Why use this particular type of representation?</h2>
 
@@ -82,7 +82,15 @@
 
 <p>We added another hand that does take input from a real clock: whereas the red dot specified solar time, the thin hand signals the actual conventional time (for instance, this takes into account daylight savings: during the summer, you can see that real times places you to the East of your current location!)</p>
 
-<h2>Is it possible to give more details about the TisP Watch?</h2>
+
+<h2>Can you explain the strange shape of the night shadow?</h2>
+
+<p>The shaded area represents the night on Earth. The Sun is to be found in the direction of Noon. The shape of the shadow depends on two factors: day of the year and peculiar features of the Azimuthal Equidistant Projection.</p>
+
+<p>In the Boreal Summer=Austral Winter (June through September) the shadow engulfs the South Pole and does not touch the North Pole, which in the Azimuthal Equidistant Projection is a degenerate point, as it coincides with the outer perimeter of the map.
+In the Austral Summer/Boreal Winter (December through March) the shadow engulfs the degenerate representation of the North Pole.</p>
+
+<h2>Is it possible to give more details about the Chronogeoscope?</h2>
 
 <p>Used on Earth, a clock does not only tell the time, it also tells what meridian you are on (modulo time zones). For instance, it tells you that it is noon now. And now it is noon in Paris. Hence the clock tells you that you are on the Paris meridian. In order to draw this conclusion from the fact that is noon now, the only thing you have to know is that it is now noon in Paris.</p>
 
@@ -100,11 +108,11 @@
 
 <h2>Disclaimer</h2>
 
-<p>The TisP Watch is not a measuring or a precision instrument. It is not a clock, but an approximate model of the Earth's spin. Its use is meant to be purely educational or recreational. Do not use it for telling the time, setting appointments, planning a trip to the airport etc. we cannot take any responsibility for uses that go beyond the intended educational use of the software.</p>
+<p>The Chronogeoscope is not a measuring or a precision instrument. It is not a clock, but an approximate model of the Earth's spin. Its use is meant to be purely educational or recreational. Do not use it for telling the time, setting appointments, planning a trip to the airport etc. we cannot take any responsibility for uses that go beyond the intended educational use of the software.</p>
 
 <h2>What is a <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license?</h2>
 
-<p>A <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license allows you to do practically anything noncommercial with the idea and code of the TisP Watch, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org</p>
+<p>A <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license allows you to do practically anything noncommercial with the idea and code of the Chronogeoscope, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org</p>
 
 <h2>Where can I find the source code?</h2>
 
@@ -121,16 +129,15 @@
 
 <p>Together, Casati and Lomax have published the open source educational software <a href="http://astrini.science-trotter.com/">Astrini</a>.</p>
 
-<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> for the TisP software and for this explanatory text.</p>
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> for the Chronogeoscope software and for this explanatory text.</p>
 
-
-        </div>
         </div>
     </div>
     <!-- Libraries -->
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <!-- My scripts -->
+    <script src="static/js/data.js"></script>
     <script src="static/js/html.js"></script>
     <script src="static/js/math.js"></script>
     <script src="static/js/graphic.js"></script>

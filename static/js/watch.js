@@ -21,6 +21,11 @@ var SOLAR_DELAY = 0;
 //~ var GRID_W = 8;
 var GRID_RES = MAP_W / 256;
 var GRID_W = 2;
+
+var CITY_LIST = capitals;
+var CITY_W = 2;
+var CITY_COLOR = 0xa40000;
+var CITY_ALPHA = 0.5;
 //origin
 var DEF_LAT = 0;
 var DEF_LON = 0;
@@ -97,6 +102,15 @@ shadowLine.lineStyle(0);
 shadowLine.pivot.x = 0;
 shadowLine.pivot.y = 0;
 
+// draw main cities
+var main_cities = new PIXI.Graphics();
+main_cities.alpha = CITY_ALPHA;
+main_cities.lineStyle(0);
+main_cities.pivot.x = 0;
+main_cities.pivot.y = 0;
+// draw city points from database
+draw_cities(CITY_LIST);
+
 //
 // Scene Graph
 //
@@ -123,6 +137,7 @@ front_cont.pivot.y = MAP_H/2;
 // setup drawing z-order
 stage.addChild(frame);
 back_cont.addChild(map);
+back_cont.addChild(main_cities);
 stage.addChild(back_cont);
 stage.addChild(shadow);
 front_cont.addChild(spot);
@@ -130,6 +145,7 @@ front_cont.addChild(ticker);
 stage.addChild(front_cont);
 stage.addChild(local_ticker);
 //~ stage.addChild(shadowLine);
+
 
 //
 // Main Loop

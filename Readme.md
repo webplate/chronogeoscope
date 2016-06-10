@@ -1,9 +1,9 @@
-# Rotating earth projection used as an international clock
+# Rotating earth projection used to read solar time.
 
 
-Knowing your longitude, you can read the time !
+**Knowing your longitude, you can read the time !**
 
-Demo:
+Demo and explanations:
 
 **https://91.121.141.56/aziclock/**
 
@@ -11,26 +11,29 @@ It's a wsgi application. Serve it with:
 
     python simplewsgi.py
 
-or for debug:
+Or with any WSGI compliant server.
+
+For debug and development launch with:
 
     python server.py
 
-Then visit :
+Then visit:
 
-    http://localhost:5005
+http://localhost:5005
 
-Dependencies :
+Dependencies:
 
-     - Python
-     - Flask (pip install Flask)
-     - pixi.js (included)
-     - bootstrap.js (included)
+- Python
+- Flask (pip install Flask)
+- pixi.js (included)
+- bootstrap.js (included)
+- sylvester.js (included)
 
+Tested browsers:
 
-Tested browsers :
-
-    - Firefox 46
-    - Chromium 50
+- Firefox 46
+- Chromium 50
 
 It should work on any modern html5 browsers with canvas support !
 Works faster if webGL is enabled.
+

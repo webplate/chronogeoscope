@@ -952,10 +952,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="436.50977"
-     inkscape:cy="286.66788"
+     inkscape:cx="307.15235"
+     inkscape:cy="467.67822"
      inkscape:document-units="px"
-     inkscape:current-layer="layer13"
+     inkscape:current-layer="svg3820"
      showgrid="false"
      fit-margin-top="50"
      fit-margin-left="50"
@@ -1001,7 +1001,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1117,7 +1117,7 @@
      id="layer5"
      inkscape:label="map"
      transform="translate(81.423588,82.579902)"
-     style="display:none">
+     style="display:inline">
     <g
        id="g4016"
        inkscape:export-filename="/home/g/dev/aziclock/static/img/map.png"
@@ -2010,7 +2010,7 @@
      inkscape:groupmode="layer"
      id="layer13"
      inkscape:label="icon gmt"
-     style="display:inline">
+     style="display:none">
     <g
        id="g4283"
        inkscape:export-filename="/home/g/dev/aziclock/static/img/gmt_icon.png"
@@ -2030,7 +2030,17 @@
          inkscape:connector-curvature="0"
          id="path4260-3"
          d="m 396.95438,423.8205 0,-60.0581"
-         style="fill:#93c3ff;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0;display:inline;fill-opacity:1" />
+         style="fill:#93c3ff;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0;display:inline" />
     </g>
   </g>
+  <path
+     sodipodi:type="arc"
+     style="color:#000000;fill:#a40000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+     id="path3285"
+     sodipodi:cx="295.25"
+     sodipodi:cy="526.15875"
+     sodipodi:rx="2.25"
+     sodipodi:ry="2.25"
+     d="m 297.5,526.15875 a 2.25,2.25 0 1 1 -4.5,0 2.25,2.25 0 1 1 4.5,0 z"
+     transform="translate(-420.43771,-46.417785)" />
 </svg>
