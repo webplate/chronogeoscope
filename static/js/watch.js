@@ -4,6 +4,7 @@ var MAP_H = 533;
 var MAP_W = MAP_H;
 var FRAME_H = SCREEN_HEIGHT;
 var FRAME_W = FRAME_H;
+var FRAME_ALPHA = 0.85;
 var TICKER_W = 20;
 var TICKER_H = 291;
 var TICKER_PIVOT_X = TICKER_W/2;
@@ -22,10 +23,11 @@ var SOLAR_DELAY = 0;
 var GRID_RES = MAP_W / 256;
 var GRID_W = 2;
 
-var CITY_LIST = capitals;
+var CITY_LIST = cap_and_largest;
 var CITY_W = 2;
 var CITY_COLOR = 0xa40000;
 var CITY_ALPHA = 0.5;
+var CITY_MIN_POP = 2000000;
 //origin
 var DEF_LAT = 0;
 var DEF_LON = 0;
@@ -93,6 +95,7 @@ local_ticker.y = SCREEN_HEIGHT/2 ;
 
 //draw frame
 var frame = PIXI.Sprite.fromImage('static/img/frame.png');
+frame.alpha = FRAME_ALPHA;
 frame.x = SCREEN_WIDTH/2 - FRAME_W/2;
 frame.y = SCREEN_HEIGHT/2 - FRAME_H/2;
 

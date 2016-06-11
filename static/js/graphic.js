@@ -107,8 +107,10 @@ function update_shadow_line(date) {
 function draw_cities(cities) {
     main_cities.beginFill(CITY_COLOR);
     for (c in cities) {
-        var coo = get_azi(cities[c]["latitude"], cities[c]["longitude"]);
-        main_cities.drawCircle(coo[0], coo[1], CITY_W);
+        if (cities[c]["population"] > CITY_MIN_POP) {
+            var coo = get_azi(cities[c]["latitude"], cities[c]["longitude"]);
+            main_cities.drawCircle(coo[0], coo[1], CITY_W);
+        }
     }
     main_cities.endFill();
 }
