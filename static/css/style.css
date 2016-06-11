@@ -8,6 +8,11 @@ body {
     background-color: rgba(255,255,255,0.85);
 }
 
+.title {
+    border-radius: 0px;
+    padding-top:0px;
+}
+
 .credit {
     float: right;
     text-align: right;
