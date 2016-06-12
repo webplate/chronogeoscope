@@ -39,6 +39,9 @@ var SHADOW_DELAY = 60*30;
 var REAL_TIME = false;
 var NOWEBGL = false;
 
+// hack to enable scrolling on smatphones
+PIXI.AUTO_PREVENT_DEFAULT = false;
+
 // create the main pixi renderer
 var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true}, noWebGl = NOWEBGL);
 
