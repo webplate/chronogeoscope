@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Chronogeoscope</title>
-    <!-- Libraries -->
-    <script src="static/js/pixi.min.js"></script>
-    <script src="static/js/sylvester.js"></script>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -15,29 +12,33 @@
     <![endif]-->
     <!-- My style -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <!-- Libraries -->
+    <script src="static/js/pixi.min.js"></script>
+    <script src="static/js/sylvester.js"></script>
 </head>
 
 <body>
-    <div class="parallax-window" data-parallax="scroll" data-image-src="static/img/starry_back.jpg">
+    <div id="parallax-window" class="parallax-window" data-parallax="scroll" data-image-src="static/img/starry_back.jpg" data-ios-fix="true" data-android-fix="true">
     
     <div class="title well">
         <h1>The Chronogeoscope <small>The earth as its own clock</small></h1>
     </div>
     <div class="center">
         <div class="clock"></div>
+        <div class="overcanvas"></div><!-- Add a div over the clock to get pan/zom/scroll events in browser -->
     </div>
     <div class="main">
         <div class="well">
             <img class="icon" src="static/img/solar_icon.png" alt="solar ticker" height="62" width="20">
-            <strong>Solar time at your position :</strong>
+            <strong>Solar time at your position</strong>
             <div class="text-center lead"><span id="solar_time"></span></div>
 
             <img class="icon" src="static/img/local_icon.png" alt="local ticker" height="62" width="20">
-            <strong>Local time :</strong>
+            <strong>Local time</strong>
             <div class="text-center lead"><span id="local_time"></span></div>
             
             <img class="icon" src="static/img/gmt_icon.png" alt="gmt ticker" height="62" width="20">
-            <strong>Greenwich mean time :</strong>
+            <strong>Greenwich mean time</strong>
             <div class="text-center lead"><span id="time"></span></div>
         </div>
         <div class="well">
@@ -136,9 +137,11 @@ In the Austral Summer/Boreal Winter (December through March) the shadow engulfs 
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> for the Chronogeoscope software and for this explanatory text.</p>
 
         </div>
+        <div><p>.</p></div><!-- Add a lower margin with parallax effect -->
     </div>
 
     </div>
+    
     <!-- Libraries -->
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/parallax.min.js"></script>

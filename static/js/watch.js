@@ -36,11 +36,29 @@ var PAGE_DELAY = 0.5;
 var TICK_DELAY = 10;
 var SHADOW_DELAY = 60*30;
 
+//performance settings
+var DRAW_CITIES = true;
+var DRAW_SHADOW = true;
+var BLUR_SHADOW = true;
 var REAL_TIME = false;
 var NOWEBGL = false;
 
-// hack to enable scrolling on smatphones
-PIXI.AUTO_PREVENT_DEFAULT = false;
+
+
+// Browser specific tweaks
+if( -1 != navigator.userAgent.indexOf("Android") ) {
+    // low resolution shadow to prevent crashing android browser
+    GRID_RES = MAP_W / 48;
+    GRID_W = 8;
+    SHADOW_ALPHA = 0.1;
+    BLUR_SHADOW = false;
+    var parallax_win = document.getElementById("parallax-window");
+    parallax_win.removeAttribute("class");
+    parallax_win.removeAttribute("data-parallax");
+    parallax_win.removeAttribute("data-image-src");
+    parallax_win.removeAttribute("data-ios-fix");
+    parallax_win.removeAttribute("data-android-fix");
+}
 
 // create the main pixi renderer
 var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true}, noWebGl = NOWEBGL);
@@ -58,10 +76,6 @@ var map = PIXI.Sprite.fromImage('static/img/map.png');
 map.x = 0;
 map.y = 0;
 
-// blur filter for shadow
-var blurFilter = new PIXI.filters.BlurFilter();
-blurFilter.blur = BLUR_SIZE;
-
 // draw earth self shadow
 var shadow = new PIXI.Graphics();
 shadow.lineStyle(0);
@@ -69,7 +83,13 @@ shadow.pivot.x = 0;
 shadow.pivot.y = 0;
 shadow.alpha = SHADOW_ALPHA;
 shadow.blendMode = PIXI.BLEND_MODES.LUMINOSITY
-shadow.filters = [blurFilter];
+
+// blur filter for shadow
+if (BLUR_SHADOW) {
+    var blurFilter = new PIXI.filters.BlurFilter();
+    blurFilter.blur = BLUR_SIZE;
+    shadow.filters = [blurFilter];
+}
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
@@ -114,8 +134,11 @@ main_cities.alpha = CITY_ALPHA;
 main_cities.lineStyle(0);
 main_cities.pivot.x = 0;
 main_cities.pivot.y = 0;
-// draw city points from database
-draw_cities(CITY_LIST);
+
+if (DRAW_CITIES) {
+    // draw city points from database
+    draw_cities(CITY_LIST);
+}
 
 //
 // Scene Graph
@@ -172,8 +195,10 @@ function animate() {
         }
         if (curr_time > flip_shadow + SHADOW_DELAY) {
             flip_shadow = curr_time;
-            // compute earth self-shadowing
-            update_shadow_grid(date);
+            if (DRAW_SHADOW) {
+                // compute earth self-shadowing
+                update_shadow_grid(date);
+            }
         }
         // update time display
         update_time_display(date);

@@ -13,6 +13,18 @@ body {
     padding-top:0px;
 }
 
+.overcanvas {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background-color: rgba(255,0,0,0);
+    z-index: 15;
+}
+
+.clock {
+    position: absolute;
+}
+
 .credit {
     float: right;
     text-align: right;
@@ -24,6 +36,7 @@ body {
 
 .main {
     margin: auto;
+    margin-top: 800px;
     max-width: 500px;
 }
 
@@ -34,6 +47,4 @@ body {
 .description {
     margin: auto;
     max-width: 700px;
-    margin-bottom: 5em;
 }
-
