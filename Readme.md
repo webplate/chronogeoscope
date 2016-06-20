@@ -5,7 +5,7 @@
 
 Demo and explanations:
 
-**https://91.121.141.56/aziclock/**
+**https://91.121.141.56/chronogeoscope/**
 
 It's a wsgi application. Serve it with:
 
