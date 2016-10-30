@@ -4,11 +4,11 @@ from PIL import ImageFilter
 from PIL import ImageDraw
 
 #Globals
-MAP_H = 533
+MAP_H = 20
 MAP_W = MAP_H
-YEAR_RES = 100
-BLUR_SIZE = MAP_H / 20
-EXT_MARGIN = numpy.pi/64
+MARGIN = MAP_H // 10
+YEAR_RES = 101  #should be an even number
+BLUR_SIZE = MAP_H // 50
 CITY_COLOR = 'rgb(255, 0, 0)'
 CITY_W = 3
 
@@ -46,7 +46,7 @@ def get_azi(lat, lon):
 # give the sun angle with earth equatorial plane
 def get_sun_tilt(x) :
     # the tilt between earth and sun
-    # (23.5degrees and summer solstice on the 172nd day)
+    # 23.5degrees 
     observable_tilt = 23.5*numpy.cos(x)
     # in radians
     observable_tilt = 2*numpy.pi*(observable_tilt/360.)
@@ -59,33 +59,45 @@ def draw_shadow(x) :
     # sun direction vector
     sd = numpy.array([numpy.cos(tilt),0 , -numpy.sin(tilt)])
     # shadow pixels array
-    shadow = numpy.zeros((MAP_H, MAP_W, 4), dtype=numpy.uint8)
+    shadow = numpy.zeros((MAP_H + MARGIN, MAP_W + MARGIN, 4), dtype=numpy.uint8)
     
-    for xa in range(MAP_W):
-        for ya in range(MAP_H):
+    for xa in range(MAP_W + MARGIN):
+        for ya in range(MAP_H + MARGIN):
             sx, sy = azi_to_spher(xa, ya)
             cart = get_cart(sx, sy)
             p = numpy.array([cart[0], cart[1], cart[2]])
             illu = sd.dot(p)
             
             # remain on earth
-            if sx < numpy.pi + EXT_MARGIN:
+            if sx < numpy.pi:
                 # draw shadow
                 if illu < 0 :
-                    shadow[xa,ya,3] = 255
+                    shadow[xa + MARGIN/2, ya + MARGIN/2, 3] = 255
 
     return shadow
 
 
 def generate_shadows(res):
-    for i, x in enumerate(numpy.linspace(0, 2*numpy.pi, res)):
-        print('Drawing shadow', i+1, '/', YEAR_RES)
+    lspace = numpy.linspace(0, numpy.pi, res)
+    for i, x in enumerate(lspace):
+        print('Drawing shadow', i, '.png /', YEAR_RES - 1, 'at angle :', x)
+        # generate shadow array
         array = draw_shadow(x)
-        # image in Grayscale, one 8-bit byte per pixel
-        im = Image.fromarray(array, mode='RGBA')
-        im = im.filter(ImageFilter.GaussianBlur(BLUR_SIZE))
-        im = im.rotate(-90)
-        im.save('../static/img/shadows/' + str(i) + '.png')
+        # convert to RGBA image
+        img = Image.fromarray(array, mode='RGBA')
+        # rotate
+        img = img.rotate(-90)
+        # add margin before blurring
+        #~ img_w, img_h = img.size
+        #~ back = Image.new('RGBA', (MAP_W + MARGIN, MAP_H + MARGIN), (0, 0, 0, 0))
+        #~ bg_w, bg_h = back.size
+        #~ offset = (int((bg_w - img_w) / 2), int((bg_h - img_h) / 2))
+        #~ back.paste(img, offset)
+        #~ img = back
+        # blur
+        img = img.filter(ImageFilter.GaussianBlur(BLUR_SIZE))
+        
+        img.save('../static/img/shadows/' + str(i) + '.png')
 
 #~ img = Image.open("oo.png")
 #~ print img
@@ -101,6 +113,24 @@ def generate_shadows(res):
 #
 import csv
 
+EXCEPTIONS = [
+['Canberra', -35.28346, 149.12807],
+['Ottawa', 45.41117, -75.69812],
+['Reykjavík', 64.13548, -21.89541],
+['Papeete', -17.53733, -149.5665],
+['Miami', 25.77427, -80.19366],
+['Dallas', 32.78306, -96.80667],
+['Chicago', 41.85003, -87.65005],
+['Detroit', 42.33143, -83.04575],
+['San Francisco', 37.77493, -122.41942],
+['Denver', 39.73915, -104.9847],
+['Honolulu', 21.30694, -157.85833],
+['Anchorage', 61.21806, -149.90028],
+['New Orleans', 29.95465, -90.07507],
+['Seattle', 47.60621, -122.33207]
+]
+
+
 def load_cities(fname):
     cities = []
     with open(fname, newline='', encoding='utf-8') as f:
@@ -115,15 +145,20 @@ def load_cities(fname):
     return cities
 
 def draw_cities(cities) :
+    
     image = Image.new('RGBA', (MAP_W, MAP_H))
     draw = ImageDraw.Draw(image)
     for c in cities:
+        x, y = get_azi(c["latitude"], c["longitude"])
         # drawing condition
         if ((c["capital"] == True and c["population"] > 1000000)
-        or c["population"] > 10000000):
-            x, y = get_azi(c["latitude"], c["longitude"])
-            draw.ellipse((x-CITY_W, y-CITY_W, x+CITY_W, y+CITY_W), fill=CITY_COLOR)
-            print('Drawing city', c["name"])
+        or c["population"] > 10000000
+        or [c["name"], c["latitude"], c["longitude"]] in EXCEPTIONS):
+            draw.ellipse((x-CITY_W, y-CITY_W, x+CITY_W, y+CITY_W),
+                fill='#DA6C5F',
+                outline='white')
+            print(c["name"])
+
     image.save('../static/img/cities.png')
 
 

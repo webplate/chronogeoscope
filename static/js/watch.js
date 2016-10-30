@@ -2,6 +2,8 @@ var SCREEN_WIDTH = 794;
 var SCREEN_HEIGHT = SCREEN_WIDTH;
 var MAP_H = 533;
 var MAP_W = MAP_H;
+var SHAD_H = 586;
+var SHAD_W = SHAD_H;
 var FRAME_H = SCREEN_HEIGHT;
 var FRAME_W = FRAME_H;
 var FRAME_ALPHA = 0.85;
@@ -15,7 +17,7 @@ var LOCAL_TICKER_PIVOT_X = LOCAL_TICKER_w/2;
 var LOCAL_TICKER_PIVOT_Y = LOCAL_TICKER_H - LOCAL_TICKER_PIVOT_X;
 var SPOT_COLOR = 0xFF0B0B;
 var SHADOW_ALPHA = 0.3;
-var CITY_ALPHA = 0.5;
+var CITY_ALPHA = 1;
 var SOLAR_DELAY = 0;
 
 //origin
@@ -60,8 +62,8 @@ map.y = 0;
 
 // draw earth self shadow
 var shadow = new PIXI.Sprite.fromImage('static/img/shadows/0.png');
-shadow.position.x = SCREEN_WIDTH/2 - MAP_W/2;
-shadow.position.y = SCREEN_HEIGHT/2 - MAP_H/2;
+shadow.position.x = SCREEN_WIDTH/2 - SHAD_W/2;
+shadow.position.y = SCREEN_HEIGHT/2 - SHAD_H/2;
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
 shadow.alpha = SHADOW_ALPHA;
@@ -145,9 +147,10 @@ stage.addChild(local_ticker);
 function animate() {    
     // create time representation
     var date = new Date();
+    
     var curr_time = Math.round(date.getTime()/1000.0);
     
-    // update display every second only
+    // update display after delay
     if (REAL_TIME || curr_time > flip_page + PAGE_DELAY) {
         flip_page = curr_time;
         if (curr_time > flip_tick + TICK_DELAY) {
@@ -158,7 +161,7 @@ function animate() {
         if (curr_time > flip_shadow + SHADOW_DELAY) {
             flip_shadow = curr_time;
             // load correct earth self-shadowing
-            //~ update_shadow(date);
+            update_shadow(date);
         }
         // update time display
         update_time_display(date);

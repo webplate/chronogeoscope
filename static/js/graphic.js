@@ -36,13 +36,19 @@ function get_sun_tilt(date) {
     // approximate current day of year
     var day_of_year = date.getUTCDate() + date.getUTCMonth() * 30.44;
     // the tilt between earth and sun
-    // (23.5° and summer solstice on the 172nd day)
+    // (23.5° at max and summer solstice on the 172nd day)
     var observable_tilt = 23.5*Math.cos(((2*Math.PI)/365)*(day_of_year - 172));
-    // in radians
-    observable_tilt = 2*Math.PI*(observable_tilt/360.);
+    
     return observable_tilt;
-    //~ return 0; 
-    //~ return -2*Math.PI*(23.5/360.);
-    //~ return 2*Math.PI*(23.5/360.) * Math.cos(date.getTime()/1000);
-    //~ return 2*Math.PI*(5/360.) * Math.cos(date.getTime()/3000);
+}
+
+
+// update shadow texture
+function update_shadow(date) {
+    var tilt = get_sun_tilt(date);
+    // select correct png
+    var i = Math.round(50 * Math.abs((tilt - 23.5) / 23.5));
+    // reload texture
+    var texture = PIXI.Texture.fromImage('static/img/shadows/'+String(i)+'.png');
+    shadow.setTexture(texture);
 }
