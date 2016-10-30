@@ -14,20 +14,10 @@ var LOCAL_TICKER_H = 289;
 var LOCAL_TICKER_PIVOT_X = LOCAL_TICKER_w/2;
 var LOCAL_TICKER_PIVOT_Y = LOCAL_TICKER_H - LOCAL_TICKER_PIVOT_X;
 var SPOT_COLOR = 0xFF0B0B;
-var SHADOW_ALPHA = 0.05;
-var BLUR_SIZE = 8;
+var SHADOW_ALPHA = 0.3;
+var CITY_ALPHA = 0.5;
 var SOLAR_DELAY = 0;
 
-//~ var GRID_RES = MAP_W / 48;
-//~ var GRID_W = 8;
-var GRID_RES = MAP_W / 256;
-var GRID_W = 2;
-
-var CITY_LIST = cap_and_largest;
-var CITY_W = 2;
-var CITY_COLOR = 0xa40000;
-var CITY_ALPHA = 0.5;
-var CITY_MIN_POP = 2000000;
 //origin
 var DEF_LAT = 0;
 var DEF_LON = 0;
@@ -37,21 +27,13 @@ var TICK_DELAY = 10;
 var SHADOW_DELAY = 60*30;
 
 //performance settings
-var DRAW_CITIES = true;
-var DRAW_SHADOW = true;
-var BLUR_SHADOW = true;
 var REAL_TIME = false;
-var NOWEBGL = false;
-
+var NOWEBGL = true;
 
 
 // Browser specific tweaks
 if( -1 != navigator.userAgent.indexOf("Android") ) {
-    // low resolution shadow to prevent crashing android browser
-    GRID_RES = MAP_W / 48;
-    GRID_W = 8;
-    SHADOW_ALPHA = 0.1;
-    BLUR_SHADOW = false;
+    // parallax effect removal
     var parallax_win = document.getElementById("parallax-window");
     parallax_win.removeAttribute("class");
     parallax_win.removeAttribute("data-parallax");
@@ -77,19 +59,11 @@ map.x = 0;
 map.y = 0;
 
 // draw earth self shadow
-var shadow = new PIXI.Graphics();
-shadow.lineStyle(0);
+var shadow = new PIXI.Sprite.fromImage('static/img/shadows/0.png');
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
 shadow.alpha = SHADOW_ALPHA;
 shadow.blendMode = PIXI.BLEND_MODES.LUMINOSITY
-
-// blur filter for shadow
-if (BLUR_SHADOW) {
-    var blurFilter = new PIXI.filters.BlurFilter();
-    blurFilter.blur = BLUR_SIZE;
-    shadow.filters = [blurFilter];
-}
 
 // draw solar time ticker
 var ticker = PIXI.Sprite.fromImage('static/img/stick.png');
@@ -122,23 +96,11 @@ frame.alpha = FRAME_ALPHA;
 frame.x = SCREEN_WIDTH/2 - FRAME_W/2;
 frame.y = SCREEN_HEIGHT/2 - FRAME_H/2;
 
-// draw shadow line
-var shadowLine = new PIXI.Graphics();
-shadowLine.lineStyle(0);
-shadowLine.pivot.x = 0;
-shadowLine.pivot.y = 0;
-
 // draw main cities
-var main_cities = new PIXI.Graphics();
+var main_cities = new PIXI.Sprite.fromImage('static/img/cities.png');
 main_cities.alpha = CITY_ALPHA;
-main_cities.lineStyle(0);
 main_cities.pivot.x = 0;
 main_cities.pivot.y = 0;
-
-if (DRAW_CITIES) {
-    // draw city points from database
-    draw_cities(CITY_LIST);
-}
 
 //
 // Scene Graph
@@ -195,10 +157,8 @@ function animate() {
         }
         if (curr_time > flip_shadow + SHADOW_DELAY) {
             flip_shadow = curr_time;
-            if (DRAW_SHADOW) {
-                // compute earth self-shadowing
-                update_shadow_grid(date);
-            }
+            // load correct earth self-shadowing
+            //~ update_shadow(date);
         }
         // update time display
         update_time_display(date);

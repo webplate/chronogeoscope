@@ -2,6 +2,15 @@
 // Trigonometry functions
 //
 
+// return coords on 2D map from lat lon in degrees
+function get_azi(lat, lon) {
+    var lon = lon * Math.PI/180;
+    var r = (MAP_W/4)/90 * lat + MAP_W/4;
+    var x = r * Math.cos(lon - Math.PI/2) + MAP_W/2;
+    var y = r * Math.sin(lon - Math.PI/2) + MAP_W/2;
+    return [x, y];
+}
+
 //~ get cartesian coordinates from spherical coordinates
 function get_cart(lat, lon) { 
     var x = Math.sin(lat) * Math.cos(lon);
