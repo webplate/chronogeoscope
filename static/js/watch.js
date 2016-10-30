@@ -186,3 +186,13 @@ var flip_tick = 0;
 var flip_shadow = 0;
 // start animating
 animate();
+
+// populate city list
+var select = document.getElementById("city"); 
+for (c in SELECTED_CITIES) {
+    var name = SELECTED_CITIES[c]["name"];
+    var option = document.createElement("option");
+    option.textContent = name;
+    option.value = name;
+    select.appendChild(option);
+}

@@ -49,10 +49,24 @@
                     <label for="longitude">Longitude :</label>
                     <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
                 </p>
-
-                <input class="btn btn-primary" type="submit" value="Send Coordinates" />
-            
+                
+                <p>
+                    <input class="btn btn-primary" type="submit" value="Send Coordinates" />
+                </p>
             </form>
+            <form action="javascript:jump_position()">
+                <p>
+                    <label for="city">Jump to city :</label>
+                    <select class="form-control" id="city" name="city">
+                        <option>Choose a city</option>
+                    </select>
+                    <p>
+                        <input class="btn btn-primary"  type="submit" value="Jump" />
+                    </p>
+                </p>
+            </form>
+            
+            
         </div>
     </div>
         <div class="description well">
@@ -155,6 +169,7 @@ In the Austral Summer/Boreal Winter (December through March) the shadow engulfs 
     <script src="static/js/parallax.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <!-- My scripts -->
+    <script src="static/js/cities.js"></script>
     <script src="static/js/html.js"></script>
     <script src="static/js/math.js"></script>
     <script src="static/js/graphic.js"></script>

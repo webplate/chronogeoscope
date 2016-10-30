@@ -113,6 +113,7 @@ def generate_shadows(res):
 ## City layer generation
 #
 import csv
+import json
 
 EXCEPTIONS = [
 ['Canberra', -35.28346, 149.12807],
@@ -145,10 +146,10 @@ def load_cities(fname):
             cities.append(city)
     return cities
 
-def draw_cities(cities) :
+def draw_cities(cities):
     image = Image.new('RGBA', (MAP_W, MAP_H))
     draw = ImageDraw.Draw(image)
-    
+    selected = []
     for c in cities:
         x, y = get_azi(c["latitude"], c["longitude"])
         # drawing condition
@@ -158,11 +159,17 @@ def draw_cities(cities) :
             draw.ellipse((x-CITY_W, y-CITY_W, x+CITY_W, y+CITY_W),
                 fill=CITY_COLOR,
                 outline=CITY_OUTLINE)
+            selected.append(c)
             print(c["name"])
-
+    # save cities png layer
     image.save('../static/img/cities.png')
+    # save selected cities sorted by name in js file
+    newlist = sorted(selected, key=lambda k: k['name']) 
+    with open('../static/js/cities.js', 'w', newline='', encoding='utf-8') as f:
+        f.write('SELECTED_CITIES = ')
+        f.write(json.dumps(newlist))
+        
 
+#~ generate_shadows(YEAR_RES)
 
-generate_shadows(YEAR_RES)
-#~ 
-#~ draw_cities(load_cities('cities15000.txt'))
+draw_cities(load_cities('cities15000.txt'))

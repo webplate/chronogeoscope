@@ -15,6 +15,20 @@ function get_position() {
     load_position(lat, lon);
 }
 
+// jump to lat lon of major city
+function jump_position() {
+    var target = document.getElementById("city").value;
+    for (i in SELECTED_CITIES) {
+        var sel = SELECTED_CITIES[i];
+        if (sel["name"] == target) {
+            var lat = sel["latitude"];
+            var lon = sel["longitude"];
+        }
+    }
+    set_position(lat, lon);
+    load_position(lat, lon);
+}
+
 // set html form with active coordinates
 function set_position(latitude, longitude) {
     document.getElementById("latitude").value = latitude;
