@@ -4,12 +4,13 @@ from PIL import ImageFilter
 from PIL import ImageDraw
 
 #Globals
-MAP_H = 20
+MAP_H = 533
 MAP_W = MAP_H
 MARGIN = MAP_H // 10
 YEAR_RES = 101  #should be an even number
 BLUR_SIZE = MAP_H // 50
-CITY_COLOR = 'rgb(255, 0, 0)'
+CITY_COLOR = '#DA6C5F'
+CITY_OUTLINE = 'white'
 CITY_W = 3
 
 # convert 2D azimutal map coord to spherical
@@ -145,9 +146,9 @@ def load_cities(fname):
     return cities
 
 def draw_cities(cities) :
-    
     image = Image.new('RGBA', (MAP_W, MAP_H))
     draw = ImageDraw.Draw(image)
+    
     for c in cities:
         x, y = get_azi(c["latitude"], c["longitude"])
         # drawing condition
@@ -155,8 +156,8 @@ def draw_cities(cities) :
         or c["population"] > 10000000
         or [c["name"], c["latitude"], c["longitude"]] in EXCEPTIONS):
             draw.ellipse((x-CITY_W, y-CITY_W, x+CITY_W, y+CITY_W),
-                fill='#DA6C5F',
-                outline='white')
+                fill=CITY_COLOR,
+                outline=CITY_OUTLINE)
             print(c["name"])
 
     image.save('../static/img/cities.png')

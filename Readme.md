@@ -5,9 +5,9 @@
 
 Demo and explanations:
 
-**https://91.121.141.56/chronogeoscope/**
+**https://science-trotter.com/chronogeoscope/**
 
-It's a wsgi application. Serve it with:
+It's a wsgi application. Serve it in production with:
 
     python simplewsgi.py
 
@@ -25,9 +25,12 @@ Dependencies:
 
 - Python
 - Flask (pip install Flask)
-- pixi.js (included)
-- bootstrap.js (included)
-- sylvester.js (included)
+
+Included dependencies:
+
+- jQuery
+- pixi.js
+- bootstrap.js
 
 Tested browsers:
 
@@ -35,5 +38,3 @@ Tested browsers:
 - Chromium 50
 
 It should work on any modern html5 browsers with canvas support !
-Works faster if webGL is enabled.
-
