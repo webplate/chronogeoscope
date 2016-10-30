@@ -68,8 +68,8 @@ def draw_shadow(x) :
             p = numpy.array([cart[0], cart[1], cart[2]])
             illu = sd.dot(p)
             
-            # remain on projection circle
-            if coo[0] < numpy.pi + EXT_MARGIN:
+            # remain on earth
+            if sx < numpy.pi + EXT_MARGIN:
                 # draw shadow
                 if illu < 0 :
                     shadow[xa,ya,3] = 255
@@ -79,12 +79,13 @@ def draw_shadow(x) :
 
 def generate_shadows(res):
     for i, x in enumerate(numpy.linspace(0, 2*numpy.pi, res)):
+        print('Drawing shadow', i+1, '/', YEAR_RES)
         array = draw_shadow(x)
         # image in Grayscale, one 8-bit byte per pixel
         im = Image.fromarray(array, mode='RGBA')
         im = im.filter(ImageFilter.GaussianBlur(BLUR_SIZE))
+        im = im.rotate(-90)
         im.save('../static/img/shadows/' + str(i) + '.png')
-        print('Drawing shadow', i+1, '/', YEAR_RES)
 
 #~ img = Image.open("oo.png")
 #~ print img
@@ -126,6 +127,6 @@ def draw_cities(cities) :
     image.save('../static/img/cities.png')
 
 
-#~ generate_shadows(YEAR_RES)
-
-draw_cities(load_cities('cities15000.txt'))
+generate_shadows(YEAR_RES)
+#~ 
+#~ draw_cities(load_cities('cities15000.txt'))

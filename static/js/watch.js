@@ -60,6 +60,8 @@ map.y = 0;
 
 // draw earth self shadow
 var shadow = new PIXI.Sprite.fromImage('static/img/shadows/0.png');
+shadow.position.x = SCREEN_WIDTH/2 - MAP_W/2;
+shadow.position.y = SCREEN_HEIGHT/2 - MAP_H/2;
 shadow.pivot.x = 0;
 shadow.pivot.y = 0;
 shadow.alpha = SHADOW_ALPHA;
@@ -118,7 +120,7 @@ back_cont.position.y = SCREEN_HEIGHT/2;
 back_cont.pivot.x = MAP_W/2;
 back_cont.pivot.y = MAP_H/2;
 
-// front contaner
+// front container
 var front_cont = new PIXI.Container();
 front_cont.position.x = SCREEN_WIDTH/2;
 front_cont.position.y = SCREEN_HEIGHT/2;
@@ -135,8 +137,6 @@ front_cont.addChild(spot);
 front_cont.addChild(ticker);
 stage.addChild(front_cont);
 stage.addChild(local_ticker);
-//~ stage.addChild(shadowLine);
-
 
 //
 // Main Loop
