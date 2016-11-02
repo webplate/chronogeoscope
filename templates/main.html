@@ -1,11 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Chronogeoscope</title>
+    <title>{{ _('Chronogeoscope') }}</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -20,7 +20,7 @@
     <div id="parallax-window" class="parallax-window" data-parallax="scroll" data-image-src="static/img/starry_back.jpg" data-ios-fix="true" data-android-fix="true">
     
     <div class="title well">
-        <h1>The Chronogeoscope <small>The earth as its own clock</small></h1>
+        <h1>{{ _('The Chronogeoscope') }} <small>{{ _('The earth as its own clock') }}</small></h1>
     </div>
     <div class="center">
         <div class="clock"></div>
@@ -29,134 +29,146 @@
     <div class="main">
         <div class="well">
             <img class="icon" src="static/img/solar_icon.png" alt="solar ticker" height="62" width="20">
-            <strong>Solar time at your position</strong>
+            <strong>{{ _('Solar time at your position') }}</strong>
             <div class="text-center lead"><span id="solar_time"></span></div>
 
             <img class="icon" src="static/img/local_icon.png" alt="local ticker" height="62" width="20">
-            <strong>Local time</strong>
+            <strong>{{ _('Local time') }}</strong>
             <div class="text-center lead"><span id="local_time"></span></div>
             
             <img class="icon" src="static/img/gmt_icon.png" alt="gmt ticker" height="62" width="20">
-            <strong>Greenwich mean time</strong>
+            <strong>{{ _('Greenwich mean time') }}</strong>
             <div class="text-center lead"><span id="time"></span></div>
         </div>
         <div class="well">
-            <form action="javascript:get_position()">
-                <p>
-                    <label for="latitude">Latitude :</label>
-                    <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
-                    
-                    <label for="longitude">Longitude :</label>
-                    <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
-                </p>
-                
-                <p>
-                    <input class="btn btn-primary" type="submit" value="Send Coordinates" />
-                </p>
-            </form>
             <form action="javascript:jump_position()">
                 <p>
-                    <label for="city">Jump to city :</label>
+                    <label for="city">{{ _('Jump to city :') }}</label>
                     <select class="form-control" id="city" name="city">
-                        <option>Choose a city</option>
+                        <option>{{ _('Choose a city') }}</option>
                     </select>
                     <p>
-                        <input class="btn btn-primary"  type="submit" value="Jump" />
+                        <input class="btn btn-primary"  type="submit" value="{{ _('Jump') }}" />
                     </p>
                 </p>
             </form>
             
+            <form action="javascript:get_position()">
+                <p>
+                    <label for="latitude">{{ _('Latitude :') }}</label>
+                    <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
+                    
+                    <label for="longitude">{{ _('Longitude :') }}</label>
+                    <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
+                </p>
+                
+                <p>
+                    <input class="btn btn-primary" type="submit" value="{{ _('Send Coordinates') }}" />
+                </p>
+            </form>
             
         </div>
     </div>
         <div class="description well">
             
 <small class="credit">
-    by <a href="http://shadowes.org/">Roberto Casati</a> and Glen Lomax, </br>
-    Institut Jean Nicod, CNRS-EHESS-ENS, </br>
+    {% autoescape false %}
+    {{ _('by %(roberto)s and %(glen)s,', roberto='<a href="http://shadowes.org/">Roberto Casati</a>', glen='Glen Lomax') }}
+    {% endautoescape %}</br>
+    Institut Jean Nicod, CNRS-EHESS-ENS, Paris, </br>
     <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>
 </small>
 
-<h2>What is the Chronogeoscope?</h2>
+<h2>{{ _('What is the Chronogeoscope ?') }}</h2>
 
-<p class="lead">The Chronogeoscope is an educational software that makes it possible to study the conceptual tie between time and place in a watch.</p>
+<p class="lead">{{ _('The Chronogeoscope is an educational software that makes it possible to study the conceptual tie between time and place in a watch.') }}</p>
 
-<p class="lead"><strong>The idea:</strong> Your location on a map of the Earth provides the hour hand of a 24 hour clock. By reading the number on the hour ring corresponding to your location, you know what the solar time of your location is. So you are not actually using a clock, but a model of the Earth's rotation, in order to get an idea of the current time.</p>
+<p class="lead"><strong>{{ _('The idea:') }}</strong> {{ _('Your location on a map of the Earth provides the hour hand of a 24 hour clock. By reading the number on the hour ring corresponding to your location, you know what the solar time of your location is. So you are not actually using a clock, but a model of the Earth\'s rotation, in order to get an idea of the current time.') }}</p>
 
-<h2>Why use this particular type of representation?</h2>
+<h2>{{ _('Why use this particular type of representation ?') }}</h2>
 
-<p class="lead">We wanted to show that hidden in each watch's face there is an implicit image of the Earth's spin. The Earth is its own clock!</p>
+<p class="lead">{{ _('We wanted to show that hidden in each watch\'s face there is an implicit image of the Earth\'s spin. The Earth is its own clock !') }}</p>
 
-<h2>How did we do it?</h2>
-
-
-<p>We divided the time on the watch's face not in 12, but in 24 hours. We then turned the clock's face into a representation of the Earth centered on the South Pole. This way the Earth's map rotates the way the Earth does (seen from above the South Pole, the rotation is clockwise.) Then we set the period of the rotating map's spin: 24 hours exactly. If you are patient enough, you will see that the map gently rotates.</p>
-
-<p>At this point, the key idea is to find your location on the map. This is done either by entering the location directly in the Latitude and Longitude boxes, or by allowing the software to retrieve your position. You position is then indicated by the red dot.</p>
-
-<p>Your location is the hour hand on a 24 hour-period rotating map of the world. This means that you can use space to tell the time.</p>
-
-<p>Here comes the important part: the way we built it, the red dot does not talk to a timepiece that tells the hour, but to a GPS that tells the place. At this point it uses a timer – not a clock – that sets the rotation at the 24 hour period.</p>
-
-<p>We added another hand that does take input from a real clock: whereas the red dot specified solar time, the thin hand signals the actual conventional time (for instance, this takes into account daylight savings: during the summer, you can see that real times places you to the East of your current location!)</p>
+<h2>{{ _('How did we do it ?') }}</h2>
 
 
-<h2>Can you explain the strange shape of the night shadow?</h2>
+<p>{{ _('We divided the time on the watch\'s face not in 12, but in 24 hours. We then turned the clock\'s face into a representation of the Earth centered on the South Pole. This way the Earth\'s map rotates the way the Earth does (seen from above the South Pole, the rotation is clockwise.) Then we set the period of the rotating map\'s spin: 24 hours exactly. If you are patient enough, you will see that the map gently rotates.') }}</p>
 
-<p>The shaded area represents the night on Earth. The Sun is to be found in the direction of Noon. The shape of the shadow depends on two factors: day of the year and peculiar features of the Azimuthal Equidistant Projection.</p>
+<p>{{ _('At this point, the key idea is to find your location on the map. This is done either by entering the location directly in the Latitude and Longitude boxes, or by allowing the software to retrieve your position. You position is then indicated by the red dot.') }}</p>
 
-<p>In the Boreal Summer=Austral Winter (June through September) the shadow engulfs the South Pole and does not touch the North Pole, which in the Azimuthal Equidistant Projection is a degenerate point, as it coincides with the outer perimeter of the map.
-In the Austral Summer/Boreal Winter (December through March) the shadow engulfs the degenerate representation of the North Pole.</p>
+<p>{{ _('Your location is the hour hand on a 24 hour-period rotating map of the world. This means that you can use space to tell the time.') }}</p>
 
-<h2>Is it possible to give more details about the Chronogeoscope?</h2>
+<p>{{ _('Here comes the important part: the way we built it, the red dot does not talk to a timepiece that tells the hour, but to a GPS that tells the place. At this point it uses a timer – not a clock – that sets the rotation at the 24 hour period.') }}</p>
 
-<p>Used on Earth, a clock does not only tell the time, it also tells what meridian you are on (modulo time zones). For instance, it tells you that it is noon now. And now it is noon in Paris. Hence the clock tells you that you are on the Paris meridian. In order to draw this conclusion from the fact that is noon now, the only thing you have to know is that it is now noon in Paris.</p>
-
-<p>Accordingly, a clock can misinform you about your location. It tells you that it is noon now. And now it is noon in Paris. The clock tells you that you are on the Paris meridian. But you are actually in London. It is 11am in London. If at 11am you look at you clock in London and it tells that it is noon, you may philosophically claim that the clock is not misinforming you, as it is telling what time it is now in Paris. But in your less philosophical moments, you would claim that the clock is plain wrong. Because it tells you that you are on the Paris meridian, and you know you are in London.</p>
-
-<p>Consider a 24 hours dial. In place of the marks for 12 hours, it has marks for 24 hours. Make it a bit more complex. Instead of the hour hand, a miniature map of the globe as projected from the South pole occupies the whole of the clock's face. In the projection (an azimuthal equidistant projection), the South Pole is at the center of the face, and the North Pole is degenerately represented by the outmost circumference. Meridians are represented by straight lines, i.e. rays emanating from the center; parallels are concentric circles. The miniature map slowly revolves clockwise around the center, coming full circle in 24 hours. Abstract from time zones, with their irregular shapes and quantizing purposes.</p>
-
-<p>Have the movement set relative to a standard of time, for instance by setting 00:00 at the Greenwhich meridian. Determine where you are, and you'll know your time. Or, conversely, determine where in the world it is now the time you read on the dial, and you'll know where you are. Suppose your position is given by a GPS and translated on the revolving miniature map by a red dot. The number you'll read at the end of the meridian on which the red dot lies is your current time. Take away the map, just leaving the red dot and the meridian. This is almost an ordinary clock's hour hand. In an ordinary (24 hours) clock, you just cannot see the map behind the meridian. But the map is there – and the hand is just a meridian on that map: your meridian.</p>
-
-<p>An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. The hour hand is replaced by an indicator of the current position of the clock (the "red dot"). Centering the projection on the South Pole aligns the clockwise spin's direction of the Earth (as seen from the South Pole) with the traditional clockwise movement of the clock's hand. The same projection could be mounted on the face of an equatorial sundial set for the Southern hemisphere.</p>
-
-<p>Perfectly working clocks can fail to tell the time. If you are at the South Pole, the red dot is at the center of the clock's face. It lies on every meridian. If you are at the North Pole, the red dot spreads and occupies the outer circumference; there too it lies on every meridian. Fair enough: at the North and the South Pole it does not make sense to ask for the hour. Two travelers heading north from different starting points who meet at the North Pole could only observe the differences between the readings of their clocks. Their clocks at the poles only indicate the direction they are coming from; they only contain spatial information.</p>
-
-<p>A sundial whose stylus coincides with the North (or the South) Pole and is parallel to the Earth's axis just indicates where on Earth it is now midnight, by pointing its shadow towards a meridian. On each point on that meridian it is now midnight (and of course, at some of those places a midnight sun shines).</p>
+<p>{{ _('We added another hand that does take input from a real clock: whereas the red dot specified solar time, the thin hand signals the actual conventional time (for instance, this takes into account daylight savings: during the summer, you can see that real times places you to the East of your current location!)') }}</p>
 
 
-<h2>A Southern perspective</h2>
+<h2>{{ _('Can you explain the strange shape of the night shadow ?') }}</h2>
 
-<p>Many complaints have been addressed to the Northern bias in geographic representation: in most maps, North is up, South is down. The Chronogeoscope is centered on the South pole, because when seen from above the South Pole, the Earth spins clockwise, and we wanted to keep the clockwise analogy with ordinary clocks. Had we centered it on the North Pole, we would have displayed a counterclockwise rotation. The clockwise constraint and the use of the Azimuthal Equidistant Projection allow us to explore a Southern Perspective on geographic representation. In the Chronogeoscope we simply get rid of the up-down couple and replace it with the center/periphery couple: South is at the center, and North is everywhere at the periphery (remember, the North Pole is to be found at the end of each meridian, and as all meridians radiate from the South Pole, the North Pole is everywhere on the outer border of the map.)</p>
+<p>{{ _('The shaded area represents the night on Earth. The Sun is to be found in the direction of Noon. The shape of the shadow depends on two factors: day of the year and peculiar features of the Azimuthal Equidistant Projection.') }}</p>
 
-<h2>How to make the most of it?</h2>
+<p>{{ _('In the Boreal Summer=Austral Winter (June through September) the shadow engulfs the South Pole and does not touch the North Pole, which in the Azimuthal Equidistant Projection is a degenerate point, as it coincides with the outer perimeter of the map.
+In the Austral Summer/Boreal Winter (December through March) the shadow engulfs the degenerate representation of the North Pole.') }}</p>
 
-<p>The Cronogeoscope is a slow educational device. It spins at the angular speed of the Earth, (15°/hour), thus your vision can't tell that it moves. You have to wait and use your memory to realize the change. Sure enough, the general trend is towards optimizing learning time ("the quicker, the better"); unfortunately we cannot offer time shortcuts here (of course you can shot a time lapse of the web page.) Here is a suggestion for educators: display it in the morning, when class begins. Then go back to it later in the day. Compare it with the movement of an ordinary clock - that spins twice as fast. Take screenshots and post them to the walls.</p>
+<h2>{{ _('Is it possible to give more details about the Chronogeoscope ?') }}</h2>
 
-<h2>Disclaimer</h2>
+<p>{{ _('Used on Earth, a clock does not only tell the time, it also tells what meridian you are on (modulo time zones). For instance, it tells you that it is noon now. And now it is noon in Paris. Hence the clock tells you that you are on the Paris meridian. In order to draw this conclusion from the fact that is noon now, the only thing you have to know is that it is now noon in Paris.') }}</p>
 
-<p>The Chronogeoscope is not a measuring or a precision instrument. It is not a clock, but an approximate model of the Earth's spin. Its use is meant to be purely educational or recreational. Do not use it for telling the time, setting appointments, planning a trip to the airport etc. we cannot take any responsibility for uses that go beyond the intended educational use of the software.</p>
+<p>{{ _('Accordingly, a clock can misinform you about your location. It tells you that it is noon now. And now it is noon in Paris. The clock tells you that you are on the Paris meridian. But you are actually in London. It is 11am in London. If at 11am you look at you clock in London and it tells that it is noon, you may philosophically claim that the clock is not misinforming you, as it is telling what time it is now in Paris. But in your less philosophical moments, you would claim that the clock is plain wrong. Because it tells you that you are on the Paris meridian, and you know you are in London.') }}</p>
 
-<h2>What is a <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license?</h2>
+<p>{{ _('Consider a 24 hours dial. In place of the marks for 12 hours, it has marks for 24 hours. Make it a bit more complex. Instead of the hour hand, a miniature map of the globe as projected from the South pole occupies the whole of the clock\'s face. In the projection (an azimuthal equidistant projection), the South Pole is at the center of the face, and the North Pole is degenerately represented by the outmost circumference. Meridians are represented by straight lines, i.e. rays emanating from the center; parallels are concentric circles. The miniature map slowly revolves clockwise around the center, coming full circle in 24 hours. Abstract from time zones, with their irregular shapes and quantizing purposes.') }}</p>
 
-<p>A <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> license allows you to do practically anything noncommercial with the idea and code of the Chronogeoscope, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org</p>
+<p>{{ _('Have the movement set relative to a standard of time, for instance by setting 00:00 at the Greenwhich meridian. Determine where you are, and you\'ll know your time. Or, conversely, determine where in the world it is now the time you read on the dial, and you\'ll know where you are. Suppose your position is given by a GPS and translated on the revolving miniature map by a red dot. The number you\'ll read at the end of the meridian on which the red dot lies is your current time. Take away the map, just leaving the red dot and the meridian. This is almost an ordinary clock\'s hour hand. In an ordinary (24 hours) clock, you just cannot see the map behind the meridian. But the map is there – and the hand is just a meridian on that map: your meridian.') }}</p>
 
-<h2>Where can I find the source code?</h2>
+<p>{{ _('An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. The hour hand is replaced by an indicator of the current position of the clock (the "red dot"). Centering the projection on the South Pole aligns the clockwise spin\'s direction of the Earth (as seen from the South Pole) with the traditional clockwise movement of the clock\'s hand. The same projection could be mounted on the face of an equatorial sundial set for the Southern hemisphere.') }}</p>
 
-<p>Everything is published on GitHub with setup instructions to host your own or to try and improve it !</p>
+<p>{{ _('Perfectly working clocks can fail to tell the time. If you are at the South Pole, the red dot is at the center of the clock\'s face. It lies on every meridian. If you are at the North Pole, the red dot spreads and occupies the outer circumference; there too it lies on every meridian. Fair enough: at the North and the South Pole it does not make sense to ask for the hour. Two travelers heading north from different starting points who meet at the North Pole could only observe the differences between the readings of their clocks. Their clocks at the poles only indicate the direction they are coming from; they only contain spatial information.') }}</p>
 
-<p> Find the source code at : 
+<p>{{ _('A sundial whose stylus coincides with the North (or the South) Pole and is parallel to the Earth\'s axis just indicates where on Earth it is now midnight, by pointing its shadow towards a meridian. On each point on that meridian it is now midnight (and of course, at some of those places a midnight sun shines).') }}</p>
+
+
+<h2>{{ _('A Southern perspective') }}</h2>
+
+<p>{{ _('Many complaints have been addressed to the Northern bias in geographic representation: in most maps, North is up, South is down. The Chronogeoscope is centered on the South pole, because when seen from above the South Pole, the Earth spins clockwise, and we wanted to keep the clockwise analogy with ordinary clocks. Had we centered it on the North Pole, we would have displayed a counterclockwise rotation. The clockwise constraint and the use of the Azimuthal Equidistant Projection allow us to explore a Southern Perspective on geographic representation. In the Chronogeoscope we simply get rid of the up-down couple and replace it with the center/periphery couple: South is at the center, and North is everywhere at the periphery (remember, the North Pole is to be found at the end of each meridian, and as all meridians radiate from the South Pole, the North Pole is everywhere on the outer border of the map.)') }}</p>
+
+<h2>{{ _('How to make the most of it ?') }}</h2>
+
+<p>{{ _('The Cronogeoscope is a slow educational device. It spins at the angular speed of the Earth, (15°/hour), thus your vision can\'t tell that it moves. You have to wait and use your memory to realize the change. Sure enough, the general trend is towards optimizing learning time ("the quicker, the better"); unfortunately we cannot offer time shortcuts here (of course you can shot a time lapse of the web page.) Here is a suggestion for educators: display it in the morning, when class begins. Then go back to it later in the day. Compare it with the movement of an ordinary clock - that spins twice as fast. Take screenshots and post them to the walls.') }}</p>
+
+<h2>{{ _('Disclaimer') }}</h2>
+
+<p>{{ _('The Chronogeoscope is not a measuring or a precision instrument. It is not a clock, but an approximate model of the Earth\'s spin. Its use is meant to be purely educational or recreational. Do not use it for telling the time, setting appointments, planning a trip to the airport etc. we cannot take any responsibility for uses that go beyond the intended educational use of the software.') }}</p>
+
+<h2>
+{% autoescape false %}
+{{ _('What is a %(license)s license ?', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}
+{% endautoescape %}
+</h2>
+
+<p>
+    {% autoescape false %}
+    {{ _('A %(license)s license allows you to do practically anything noncommercial with the idea and code of the Chronogeoscope, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}
+    {% endautoescape %}
+    </p>
+
+<h2>{{ _('Where can I find the source code ?') }}</h2>
+
+<p>{{ _('Everything is published on GitHub with setup instructions to host your own or to try and improve it !') }}</p>
+
+<p> {{ _('Find the source code at : ') }}
 <a class="lead" href="https://github.com/webplate/chronogeoscope">https://github.com/webplate/chronogeoscope</a></p>
 
-<h2>Who are we?</h2>
+<h2>{{ _('Who are we ?') }}</h2>
 
-<p>Roberto Casati is a Senior researcher with the French CNRS.</p>
+<p>{{ _('Roberto Casati is a Senior researcher with the French CNRS.') }}</p>
 
-<p>Glen Lomax is an independent researcher and coder.</p>
+<p>{{ _('Glen Lomax is an independent researcher and coder.') }}</p>
 
-<p>Together, Casati and Lomax have published the open source educational software <a href="http://astrini.science-trotter.com/">Astrini</a>.</p>
+{% autoescape false %}
+<p>{{ _('Together, Casati and Lomax have published the open source educational software %(astrini)s.', astrini='<a href="http://astrini.science-trotter.com/">Astrini</a>') }}</p>
 
-<p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a> for the Chronogeoscope software and for this explanatory text.</p>
+<p>{{ _('The Chronogeoscope software and this explanatory text are published under the license %(license)s.', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}</p>
+{% endautoescape %}
 
         </div>
         <div><p>.</p></div><!-- Add a lower margin with parallax effect -->

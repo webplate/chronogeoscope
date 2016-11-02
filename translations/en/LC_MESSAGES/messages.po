@@ -1,0 +1,511 @@
+# English translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-11-01 17:56+0100\n"
+"PO-Revision-Date: 2016-11-01 17:50+0100\n"
+"Last-Translator: Glen Lomax <glenlomax@gmail.com>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: templates/main.html:5
+msgid "Chronogeoscope"
+msgstr "Chronogeoscope"
+
+#: templates/main.html:23
+msgid "The Chronogeoscope"
+msgstr "The Chronogeoscope"
+
+#: templates/main.html:23
+msgid "The earth as its own clock"
+msgstr "The earth as its own clock"
+
+#: templates/main.html:32
+msgid "Solar time at your position"
+msgstr "Solar time at your position"
+
+#: templates/main.html:36
+msgid "Local time"
+msgstr "Local time"
+
+#: templates/main.html:40
+msgid "Greenwich mean time"
+msgstr "Greenwich mean time"
+
+#: templates/main.html:46
+msgid "Jump to city :"
+msgstr "Jump to city:"
+
+#: templates/main.html:48
+msgid "Choose a city"
+msgstr "Choose a city"
+
+#: templates/main.html:51
+msgid "Jump"
+msgstr "Jump"
+
+#: templates/main.html:58
+msgid "Latitude :"
+msgstr "Latitude:"
+
+#: templates/main.html:61
+msgid "Longitude :"
+msgstr "Longitude :"
+
+#: templates/main.html:66
+msgid "Send Coordinates"
+msgstr "Send Coordinates"
+
+#: templates/main.html:76
+#, python-format
+msgid "by %(roberto)s and %(glen)s,"
+msgstr "by %(roberto)s and %(glen)s,"
+
+#: templates/main.html:82
+msgid "What is the Chronogeoscope ?"
+msgstr "What is the Chronogeoscope?"
+
+#: templates/main.html:84
+msgid ""
+"The Chronogeoscope is an educational software that makes it possible to "
+"study the conceptual tie between time and place in a watch."
+msgstr ""
+"The Chronogeoscope is an educational software that makes it possible to "
+"study the conceptual tie between time and place in a watch."
+
+#: templates/main.html:86
+msgid "The idea:"
+msgstr "The idea:"
+
+#: templates/main.html:86
+msgid ""
+"Your location on a map of the Earth provides the hour hand of a 24 hour "
+"clock. By reading the number on the hour ring corresponding to your "
+"location, you know what the solar time of your location is. So you are "
+"not actually using a clock, but a model of the Earth's rotation, in order"
+" to get an idea of the current time."
+msgstr ""
+"Your location on a map of the Earth provides the hour hand of a 24 hour "
+"clock. By reading the number on the hour ring corresponding to your "
+"location, you know what the solar time of your location is. So you are "
+"not actually using a clock, but a model of the Earth's rotation, in order"
+" to get an idea of the current time."
+
+#: templates/main.html:88
+msgid "Why use this particular type of representation ?"
+msgstr "Why use this particular type of representation?"
+
+#: templates/main.html:90
+msgid ""
+"We wanted to show that hidden in each watch's face there is an implicit "
+"image of the Earth's spin. The Earth is its own clock !"
+msgstr ""
+"We wanted to show that hidden in each watch's face there is an implicit "
+"image of the Earth's spin. The Earth is its own clock!"
+
+#: templates/main.html:92
+msgid "How did we do it ?"
+msgstr "How did we do it?"
+
+#: templates/main.html:95
+msgid ""
+"We divided the time on the watch's face not in 12, but in 24 hours. We "
+"then turned the clock's face into a representation of the Earth centered "
+"on the South Pole. This way the Earth's map rotates the way the Earth "
+"does (seen from above the South Pole, the rotation is clockwise.) Then we"
+" set the period of the rotating map's spin: 24 hours exactly. If you are "
+"patient enough, you will see that the map gently rotates."
+msgstr ""
+"We divided the time on the watch's face not in 12, but in 24 hours. We "
+"then turned the clock's face into a representation of the Earth centered "
+"on the South Pole. This way the Earth's map rotates the way the Earth "
+"does (seen from above the South Pole, the rotation is clockwise.) Then we"
+" set the period of the rotating map's spin: 24 hours exactly. If you are "
+"patient enough, you will see that the map gently rotates."
+
+#: templates/main.html:97
+msgid ""
+"At this point, the key idea is to find your location on the map. This is "
+"done either by entering the location directly in the Latitude and "
+"Longitude boxes, or by allowing the software to retrieve your position. "
+"You position is then indicated by the red dot."
+msgstr ""
+"At this point, the key idea is to find your location on the map. This is "
+"done either by entering the location directly in the Latitude and "
+"Longitude boxes, or by allowing the software to retrieve your position. "
+"You position is then indicated by the red dot."
+
+#: templates/main.html:99
+msgid ""
+"Your location is the hour hand on a 24 hour-period rotating map of the "
+"world. This means that you can use space to tell the time."
+msgstr ""
+"Your location is the hour hand on a 24 hour-period rotating map of the "
+"world. This means that you can use space to tell the time."
+
+#: templates/main.html:101
+msgid ""
+"Here comes the important part: the way we built it, the red dot does not "
+"talk to a timepiece that tells the hour, but to a GPS that tells the "
+"place. At this point it uses a timer – not a clock – that sets the "
+"rotation at the 24 hour period."
+msgstr ""
+"Here comes the important part: the way we built it, the red dot does not "
+"talk to a timepiece that tells the hour, but to a GPS that tells the "
+"place. At this point it uses a timer – not a clock – that sets the "
+"rotation at the 24 hour period."
+
+#: templates/main.html:103
+msgid ""
+"We added another hand that does take input from a real clock: whereas the"
+" red dot specified solar time, the thin hand signals the actual "
+"conventional time (for instance, this takes into account daylight "
+"savings: during the summer, you can see that real times places you to the"
+" East of your current location!)"
+msgstr ""
+"We added another hand that does take input from a real clock: whereas the"
+" red dot specified solar time, the thin hand signals the actual "
+"conventional time (for instance, this takes into account daylight "
+"savings: during the summer, you can see that real times places you to the"
+" East of your current location!)"
+
+#: templates/main.html:106
+msgid "Can you explain the strange shape of the night shadow ?"
+msgstr "Can you explain the strange shape of the night shadow?"
+
+#: templates/main.html:108
+msgid ""
+"The shaded area represents the night on Earth. The Sun is to be found in "
+"the direction of Noon. The shape of the shadow depends on two factors: "
+"day of the year and peculiar features of the Azimuthal Equidistant "
+"Projection."
+msgstr ""
+"The shaded area represents the night on Earth. The Sun is to be found in "
+"the direction of Noon. The shape of the shadow depends on two factors: "
+"day of the year and peculiar features of the Azimuthal Equidistant "
+"Projection."
+
+#: templates/main.html:110
+msgid ""
+"In the Boreal Summer=Austral Winter (June through September) the shadow "
+"engulfs the South Pole and does not touch the North Pole, which in the "
+"Azimuthal Equidistant Projection is a degenerate point, as it coincides "
+"with the outer perimeter of the map.\n"
+"In the Austral Summer/Boreal Winter (December through March) the shadow "
+"engulfs the degenerate representation of the North Pole."
+msgstr ""
+"In the Boreal Summer=Austral Winter (June through September) the shadow "
+"engulfs the South Pole and does not touch the North Pole, which in the "
+"Azimuthal Equidistant Projection is a degenerate point, as it coincides "
+"with the outer perimeter of the map.\n"
+"In the Austral Summer/Boreal Winter (December through March) the shadow "
+"engulfs the degenerate representation of the North Pole."
+
+#: templates/main.html:113
+msgid "Is it possible to give more details about the Chronogeoscope ?"
+msgstr "Is it possible to give more details about the Chronogeoscope?"
+
+#: templates/main.html:115
+msgid ""
+"Used on Earth, a clock does not only tell the time, it also tells what "
+"meridian you are on (modulo time zones). For instance, it tells you that "
+"it is noon now. And now it is noon in Paris. Hence the clock tells you "
+"that you are on the Paris meridian. In order to draw this conclusion from"
+" the fact that is noon now, the only thing you have to know is that it is"
+" now noon in Paris."
+msgstr ""
+"Used on Earth, a clock does not only tell the time, it also tells what "
+"meridian you are on (modulo time zones). For instance, it tells you that "
+"it is noon now. And now it is noon in Paris. Hence the clock tells you "
+"that you are on the Paris meridian. In order to draw this conclusion from"
+" the fact that is noon now, the only thing you have to know is that it is"
+" now noon in Paris."
+
+#: templates/main.html:117
+msgid ""
+"Accordingly, a clock can misinform you about your location. It tells you "
+"that it is noon now. And now it is noon in Paris. The clock tells you "
+"that you are on the Paris meridian. But you are actually in London. It is"
+" 11am in London. If at 11am you look at you clock in London and it tells "
+"that it is noon, you may philosophically claim that the clock is not "
+"misinforming you, as it is telling what time it is now in Paris. But in "
+"your less philosophical moments, you would claim that the clock is plain "
+"wrong. Because it tells you that you are on the Paris meridian, and you "
+"know you are in London."
+msgstr ""
+"Accordingly, a clock can misinform you about your location. It tells you "
+"that it is noon now. And now it is noon in Paris. The clock tells you "
+"that you are on the Paris meridian. But you are actually in London. It is"
+" 11am in London. If at 11am you look at you clock in London and it tells "
+"that it is noon, you may philosophically claim that the clock is not "
+"misinforming you, as it is telling what time it is now in Paris. But in "
+"your less philosophical moments, you would claim that the clock is plain "
+"wrong. Because it tells you that you are on the Paris meridian, and you "
+"know you are in London."
+
+#: templates/main.html:119
+msgid ""
+"Consider a 24 hours dial. In place of the marks for 12 hours, it has "
+"marks for 24 hours. Make it a bit more complex. Instead of the hour hand,"
+" a miniature map of the globe as projected from the South pole occupies "
+"the whole of the clock's face. In the projection (an azimuthal "
+"equidistant projection), the South Pole is at the center of the face, and"
+" the North Pole is degenerately represented by the outmost circumference."
+" Meridians are represented by straight lines, i.e. rays emanating from "
+"the center; parallels are concentric circles. The miniature map slowly "
+"revolves clockwise around the center, coming full circle in 24 hours. "
+"Abstract from time zones, with their irregular shapes and quantizing "
+"purposes."
+msgstr ""
+"Consider a 24 hours dial. In place of the marks for 12 hours, it has "
+"marks for 24 hours. Make it a bit more complex. Instead of the hour hand,"
+" a miniature map of the globe as projected from the South pole occupies "
+"the whole of the clock's face. In the projection (an azimuthal "
+"equidistant projection), the South Pole is at the center of the face, and"
+" the North Pole is degenerately represented by the outmost circumference."
+" Meridians are represented by straight lines, i.e. rays emanating from "
+"the center; parallels are concentric circles. The miniature map slowly "
+"revolves clockwise around the center, coming full circle in 24 hours. "
+"Abstract from time zones, with their irregular shapes and quantizing "
+"purposes."
+
+#: templates/main.html:121
+msgid ""
+"Have the movement set relative to a standard of time, for instance by "
+"setting 00:00 at the Greenwhich meridian. Determine where you are, and "
+"you'll know your time. Or, conversely, determine where in the world it is"
+" now the time you read on the dial, and you'll know where you are. "
+"Suppose your position is given by a GPS and translated on the revolving "
+"miniature map by a red dot. The number you'll read at the end of the "
+"meridian on which the red dot lies is your current time. Take away the "
+"map, just leaving the red dot and the meridian. This is almost an "
+"ordinary clock's hour hand. In an ordinary (24 hours) clock, you just "
+"cannot see the map behind the meridian. But the map is there – and the "
+"hand is just a meridian on that map: your meridian."
+msgstr ""
+"Have the movement set relative to a standard of time, for instance by "
+"setting 00:00 at the Greenwhich meridian. Determine where you are, and "
+"you'll know your time. Or, conversely, determine where in the world it is"
+" now the time you read on the dial, and you'll know where you are. "
+"Suppose your position is given by a GPS and translated on the revolving "
+"miniature map by a red dot. The number you'll read at the end of the "
+"meridian on which the red dot lies is your current time. Take away the "
+"map, just leaving the red dot and the meridian. This is almost an "
+"ordinary clock's hour hand. In an ordinary (24 hours) clock, you just "
+"cannot see the map behind the meridian. But the map is there – and the "
+"hand is just a meridian on that map: your meridian."
+
+#: templates/main.html:123
+msgid ""
+"An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. "
+"The hour hand is replaced by an indicator of the current position of the "
+"clock (the \"red dot\"). Centering the projection on the South Pole "
+"aligns the clockwise spin's direction of the Earth (as seen from the "
+"South Pole) with the traditional clockwise movement of the clock's hand. "
+"The same projection could be mounted on the face of an equatorial sundial"
+" set for the Southern hemisphere."
+msgstr ""
+"An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. "
+"The hour hand is replaced by an indicator of the current position of the "
+"clock (the \"red dot\"). Centering the projection on the South Pole "
+"aligns the clockwise spin's direction of the Earth (as seen from the "
+"South Pole) with the traditional clockwise movement of the clock's hand. "
+"The same projection could be mounted on the face of an equatorial sundial"
+" set for the Southern hemisphere."
+
+#: templates/main.html:125
+msgid ""
+"Perfectly working clocks can fail to tell the time. If you are at the "
+"South Pole, the red dot is at the center of the clock's face. It lies on "
+"every meridian. If you are at the North Pole, the red dot spreads and "
+"occupies the outer circumference; there too it lies on every meridian. "
+"Fair enough: at the North and the South Pole it does not make sense to "
+"ask for the hour. Two travelers heading north from different starting "
+"points who meet at the North Pole could only observe the differences "
+"between the readings of their clocks. Their clocks at the poles only "
+"indicate the direction they are coming from; they only contain spatial "
+"information."
+msgstr ""
+"Perfectly working clocks can fail to tell the time. If you are at the "
+"South Pole, the red dot is at the center of the clock's face. It lies on "
+"every meridian. If you are at the North Pole, the red dot spreads and "
+"occupies the outer circumference; there too it lies on every meridian. "
+"Fair enough: at the North and the South Pole it does not make sense to "
+"ask for the hour. Two travelers heading north from different starting "
+"points who meet at the North Pole could only observe the differences "
+"between the readings of their clocks. Their clocks at the poles only "
+"indicate the direction they are coming from; they only contain spatial "
+"information."
+
+#: templates/main.html:127
+msgid ""
+"A sundial whose stylus coincides with the North (or the South) Pole and "
+"is parallel to the Earth's axis just indicates where on Earth it is now "
+"midnight, by pointing its shadow towards a meridian. On each point on "
+"that meridian it is now midnight (and of course, at some of those places "
+"a midnight sun shines)."
+msgstr ""
+"A sundial whose stylus coincides with the North (or the South) Pole and "
+"is parallel to the Earth's axis just indicates where on Earth it is now "
+"midnight, by pointing its shadow towards a meridian. On each point on "
+"that meridian it is now midnight (and of course, at some of those places "
+"a midnight sun shines)."
+
+#: templates/main.html:130
+msgid "A Southern perspective"
+msgstr "A Southern perspective"
+
+#: templates/main.html:132
+msgid ""
+"Many complaints have been addressed to the Northern bias in geographic "
+"representation: in most maps, North is up, South is down. The "
+"Chronogeoscope is centered on the South pole, because when seen from "
+"above the South Pole, the Earth spins clockwise, and we wanted to keep "
+"the clockwise analogy with ordinary clocks. Had we centered it on the "
+"North Pole, we would have displayed a counterclockwise rotation. The "
+"clockwise constraint and the use of the Azimuthal Equidistant Projection "
+"allow us to explore a Southern Perspective on geographic representation. "
+"In the Chronogeoscope we simply get rid of the up-down couple and replace"
+" it with the center/periphery couple: South is at the center, and North "
+"is everywhere at the periphery (remember, the North Pole is to be found "
+"at the end of each meridian, and as all meridians radiate from the South "
+"Pole, the North Pole is everywhere on the outer border of the map.)"
+msgstr ""
+"Many complaints have been addressed to the Northern bias in geographic "
+"representation: in most maps, North is up, South is down. The "
+"Chronogeoscope is centered on the South pole, because when seen from "
+"above the South Pole, the Earth spins clockwise, and we wanted to keep "
+"the clockwise analogy with ordinary clocks. Had we centered it on the "
+"North Pole, we would have displayed a counterclockwise rotation. The "
+"clockwise constraint and the use of the Azimuthal Equidistant Projection "
+"allow us to explore a Southern Perspective on geographic representation. "
+"In the Chronogeoscope we simply get rid of the up-down couple and replace"
+" it with the center/periphery couple: South is at the center, and North "
+"is everywhere at the periphery (remember, the North Pole is to be found "
+"at the end of each meridian, and as all meridians radiate from the South "
+"Pole, the North Pole is everywhere on the outer border of the map.)"
+
+#: templates/main.html:134
+msgid "How to make the most of it ?"
+msgstr "How to make the most of it?"
+
+#: templates/main.html:136
+msgid ""
+"The Cronogeoscope is a slow educational device. It spins at the angular "
+"speed of the Earth, (15°/hour), thus your vision can't tell that it "
+"moves. You have to wait and use your memory to realize the change. Sure "
+"enough, the general trend is towards optimizing learning time (\"the "
+"quicker, the better\"); unfortunately we cannot offer time shortcuts here"
+" (of course you can shot a time lapse of the web page.) Here is a "
+"suggestion for educators: display it in the morning, when class begins. "
+"Then go back to it later in the day. Compare it with the movement of an "
+"ordinary clock - that spins twice as fast. Take screenshots and post them"
+" to the walls."
+msgstr ""
+"The Cronogeoscope is a slow educational device. It spins at the angular "
+"speed of the Earth, (15°/hour), thus your vision can't tell that it "
+"moves. You have to wait and use your memory to realize the change. Sure "
+"enough, the general trend is towards optimizing learning time (\"the "
+"quicker, the better\"); unfortunately we cannot offer time shortcuts here"
+" (of course you can shot a time lapse of the web page.) Here is a "
+"suggestion for educators: display it in the morning, when class begins. "
+"Then go back to it later in the day. Compare it with the movement of an "
+"ordinary clock - that spins twice as fast. Take screenshots and post them"
+" to the walls."
+
+#: templates/main.html:138
+msgid "Disclaimer"
+msgstr "Disclaimer"
+
+#: templates/main.html:140
+msgid ""
+"The Chronogeoscope is not a measuring or a precision instrument. It is "
+"not a clock, but an approximate model of the Earth's spin. Its use is "
+"meant to be purely educational or recreational. Do not use it for telling"
+" the time, setting appointments, planning a trip to the airport etc. we "
+"cannot take any responsibility for uses that go beyond the intended "
+"educational use of the software."
+msgstr ""
+"The Chronogeoscope is not a measuring or a precision instrument. It is "
+"not a clock, but an approximate model of the Earth's spin. Its use is "
+"meant to be purely educational or recreational. Do not use it for telling"
+" the time, setting appointments, planning a trip to the airport etc. we "
+"cannot take any responsibility for uses that go beyond the intended "
+"educational use of the software."
+
+#: templates/main.html:144
+#, python-format
+msgid "What is a %(license)s license ?"
+msgstr "What is a %(license)s license ?"
+
+#: templates/main.html:150
+#, python-format
+msgid ""
+"A %(license)s license allows you to do practically anything noncommercial"
+" with the idea and code of the Chronogeoscope, provided you credit "
+"authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea "
+"or the code should be approved by its authors. Please read the relevant "
+"texts at creativecommons.org"
+msgstr ""
+"A %(license)s license allows you to do practically anything noncommercial"
+" with the idea and code of the Chronogeoscope, provided you credit "
+"authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea "
+"or the code should be approved by its authors. Please read the relevant "
+"texts at creativecommons.org"
+
+#: templates/main.html:154
+msgid "Where can I find the source code ?"
+msgstr "Where can I find the source code?"
+
+#: templates/main.html:156
+msgid ""
+"Everything is published on GitHub with setup instructions to host your "
+"own or to try and improve it !"
+msgstr ""
+"Everything is published on GitHub with setup instructions to host your "
+"own or to try and improve it!"
+
+#: templates/main.html:158
+msgid "Find the source code at : "
+msgstr "Find the source code at: "
+
+#: templates/main.html:161
+msgid "Who are we ?"
+msgstr "Who are we?"
+
+#: templates/main.html:163
+msgid "Roberto Casati is a Senior researcher with the French CNRS."
+msgstr "Roberto Casati is a Senior researcher with the French CNRS."
+
+#: templates/main.html:165
+msgid "Glen Lomax is an independent researcher and coder."
+msgstr "Glen Lomax is an independent researcher and coder."
+
+#: templates/main.html:168
+#, python-format
+msgid ""
+"Together, Casati and Lomax have published the open source educational "
+"software %(astrini)s."
+msgstr ""
+"Together, Casati and Lomax have published the open source educational "
+"software %(astrini)s."
+
+#: templates/main.html:170
+#, python-format
+msgid ""
+"The Chronogeoscope software and this explanatory text are published under"
+" the license %(license)s."
+msgstr ""
+"The Chronogeoscope software and this explanatory text are published under"
+" the license %(license)s."
+
