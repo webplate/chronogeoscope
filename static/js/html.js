@@ -95,12 +95,14 @@ function adapt_to_screen_size() {
     
     overcanvas.style.width = String(actual_size) + 'px';
     overcanvas.style.height = String(actual_size) + 'px';
+    fullclock.style.width = String(actual_size) + 'px';
+    
         
     // threshold to change layout
     var t = CANVAS_WIDTH + CONTROLS_WIDTH + 40;
     var limit = Math.round(win_width / 2 + (actual_size - CONTROLS_WIDTH) / 2);
     // adapt layout from viewport size
-    if (win_width > t) {   
+    if (win_width > t && win_height > controls_height) {   
         fullclock.style.marginBottom = '0px';
         fullclock.style.marginLeft = String(limit - actual_size) + 'px';
         
@@ -108,7 +110,7 @@ function adapt_to_screen_size() {
         controls.style.marginTop = String(Math.round((actual_size - controls_height) / 2)+20) + 'px';
         controls.style.marginBottom = String(Math.round((actual_size - controls_height) / 2) + 20) + 'px';
 
-    } else if (win_width <= t) {
+    } else if (win_width <= t || win_height <= controls_height) {
         fullclock.style.marginBottom = String(Math.min(win_width, actual_size) + 40) + 'px';
         fullclock.style.marginLeft = '';
         
