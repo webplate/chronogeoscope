@@ -22,61 +22,65 @@
     <div class="title well">
         <h1>{{ _('The Chronogeoscope') }} <small>{{ _('The earth as its own clock') }}</small></h1>
     </div>
-    <div class="center">
-        <div class="clock"></div>
-        <div class="overcanvas"></div><!-- Add a div over the clock to get pan/zom/scroll events in browser -->
+    
+    <div id="fullclock" class="center">
+            <div id="clock"></div>
+            <div id="overcanvas"></div><!-- Add a div over the clock to get pan/zom/scroll events in browser -->
     </div>
-    <div class="main">
-        <div class="well">
-            <img class="icon" src="static/img/solar_icon.png" alt="solar ticker" height="62" width="20">
-            <strong>{{ _('Solar time at your position') }}</strong>
-            <div class="text-center lead"><span id="solar_time"></span></div>
+        
+    <div id="controls" class="center">
+            <div class="well">
+                <img class="icon" src="static/img/solar_icon.png" alt="solar ticker" height="62" width="20">
+                <strong>{{ _('Solar time at your position') }}</strong>
+                <div class="text-center lead"><span id="solar_time" class="time_display"></span></div>
 
-            <img class="icon" src="static/img/local_icon.png" alt="local ticker" height="62" width="20">
-            <strong>{{ _('Local time') }}</strong>
-            <div class="text-center lead"><span id="local_time"></span></div>
-            
-            <img class="icon" src="static/img/gmt_icon.png" alt="gmt ticker" height="62" width="20">
-            <strong>{{ _('Greenwich mean time') }}</strong>
-            <div class="text-center lead"><span id="time"></span></div>
-        </div>
-        <div class="well">
-            <form action="javascript:jump_position()">
-                <p>
-                    <label for="city">{{ _('Jump to city :') }}</label>
-                    <select class="form-control" id="city" name="city">
-                        <option>{{ _('Choose a city') }}</option>
-                    </select>
-                    <p>
-                        <input class="btn btn-primary"  type="submit" value="{{ _('Jump') }}" />
-                    </p>
-                </p>
-            </form>
-            
-            <form action="javascript:get_position()">
-                <p>
-                    <label for="latitude">{{ _('Latitude :') }}</label>
-                    <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
-                    
-                    <label for="longitude">{{ _('Longitude :') }}</label>
-                    <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
-                </p>
+                <img class="icon" src="static/img/local_icon.png" alt="local ticker" height="62" width="20">
+                <strong>{{ _('Local time') }}</strong>
+                <div class="text-center lead"><span id="local_time" class="time_display"></span></div>
                 
-                <p>
-                    <input class="btn btn-primary" type="submit" value="{{ _('Send Coordinates') }}" />
-                </p>
-            </form>
-            
-        </div>
+                <img class="icon" src="static/img/gmt_icon.png" alt="gmt ticker" height="62" width="20">
+                <strong>{{ _('Greenwich mean time') }}</strong>
+                <div class="text-center lead"><span id="time" class="time_display"></span></div>
+            </div>
+            <div class="well">
+                <form action="javascript:jump_position()">
+                    <p>
+                        <label for="city">{{ _('Jump to city :') }}</label>
+                        <select class="form-control" id="city" name="city">
+                            <option>{{ _('Choose a city') }}</option>
+                        </select>
+                        <p>
+                            <input class="btn btn-primary"  type="submit" value="{{ _('Jump') }}" />
+                        </p>
+                    </p>
+                </form>
+                
+                <form action="javascript:get_position()">
+                    <p>
+                        <label for="latitude">{{ _('Latitude :') }}</label>
+                        <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
+                        
+                        <label for="longitude">{{ _('Longitude :') }}</label>
+                        <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
+                    </p>
+                    
+                    <p>
+                        <input class="btn btn-primary" type="submit" value="{{ _('Send Coordinates') }}" />
+                    </p>
+                </form>
+                
+            </div>
+        
     </div>
-        <div class="description well">
+
+    <div class="description well">
             
 <small class="credit">
     {% autoescape false %}
     {{ _('by %(roberto)s and %(glen)s,', roberto='<a href="http://shadowes.org/">Roberto Casati</a>', glen='Glen Lomax') }}
     {% endautoescape %}</br>
     Institut Jean Nicod, CNRS-EHESS-ENS, Paris, </br>
-    <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC-BY-NC-SA)</a>
 </small>
 
 <h2>{{ _('What is the Chronogeoscope ?') }}</h2>
@@ -141,13 +145,13 @@ In the Austral Summer/Boreal Winter (December through March) the shadow engulfs 
 
 <h2>
 {% autoescape false %}
-{{ _('What is a %(license)s license ?', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}
+{{ _('What is a %(license)s license ?', license='<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC-BY-NC-SA)</a>') }}
 {% endautoescape %}
 </h2>
 
 <p>
     {% autoescape false %}
-    {{ _('A %(license)s license allows you to do practically anything noncommercial with the idea and code of the Chronogeoscope, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}
+    {{ _('A %(license)s license allows you to do practically anything noncommercial with the idea and code of the Chronogeoscope, provided you credit authorship to Roberto Casati and Glen Lomax. Commercial uses of the idea or the code should be approved by its authors. Please read the relevant texts at creativecommons.org', license='<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC-BY-NC-SA)</a>') }}
     {% endautoescape %}
     </p>
 
@@ -167,7 +171,7 @@ In the Austral Summer/Boreal Winter (December through March) the shadow engulfs 
 {% autoescape false %}
 <p>{{ _('Together, Casati and Lomax have published the open source educational software %(astrini)s.', astrini='<a href="http://astrini.science-trotter.com/">Astrini</a>') }}</p>
 
-<p>{{ _('The Chronogeoscope software and this explanatory text are published under the license %(license)s.', license='<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(CC-BY-NC-SA)</a>') }}</p>
+<p>{{ _('The Chronogeoscope software and this explanatory text are published under the license %(license)s.', license='<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC-BY-NC-SA)</a>') }}</p>
 {% endautoescape %}
 
         </div>

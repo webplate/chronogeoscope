@@ -1,5 +1,8 @@
 var SCREEN_WIDTH = 794;
 var SCREEN_HEIGHT = SCREEN_WIDTH;
+var CANVAS_WIDTH = 800;
+var CANVAS_HEIGHT = CANVAS_WIDTH;
+var CONTROLS_WIDTH = 400;
 var MAP_H = 533;
 var MAP_W = MAP_H;
 var SHAD_H = 586;
@@ -16,7 +19,7 @@ var LOCAL_TICKER_H = 289;
 var LOCAL_TICKER_PIVOT_X = LOCAL_TICKER_w/2;
 var LOCAL_TICKER_PIVOT_Y = LOCAL_TICKER_H - LOCAL_TICKER_PIVOT_X;
 var SPOT_COLOR = 0xFF0B0B;
-var SHADOW_ALPHA = 0.3;
+var SHADOW_ALPHA = 0.15;
 var CITY_ALPHA = 1;
 var SOLAR_DELAY = 0;
 
@@ -48,7 +51,7 @@ if( -1 != navigator.userAgent.indexOf("Android") ) {
 var renderer = PIXI.autoDetectRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,{transparent: true}, noWebGl = NOWEBGL);
 
 // add pixi surface to centered div
-var div = document.body.getElementsByClassName("clock")[0];
+var div = document.getElementById("clock");
 div.appendChild(renderer.view);
 
 //
@@ -140,6 +143,14 @@ front_cont.addChild(ticker);
 stage.addChild(front_cont);
 stage.addChild(local_ticker);
 
+// register screen resize handler
+var resizeTimer;
+
+$(window).resize(function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(adapt_to_screen_size, 100);
+});
+
 //
 // Main Loop
 //
@@ -163,6 +174,7 @@ function animate() {
             // load correct earth self-shadowing
             update_shadow(date);
         }
+
         // update time display
         update_time_display(date);
         
@@ -186,6 +198,8 @@ var flip_tick = 0;
 var flip_shadow = 0;
 // start animating
 animate();
+// initialize responsivness
+adapt_to_screen_size();
 
 // populate city list
 var select = document.getElementById("city"); 

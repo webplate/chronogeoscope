@@ -13,7 +13,7 @@ body {
     padding-top:0px;
 }
 
-.overcanvas {
+#overcanvas {
     position: absolute;
     width: 800px;
     height: 800px;
@@ -21,7 +21,7 @@ body {
     z-index: 15;
 }
 
-.clock {
+#clock {
     position: absolute;
 }
 
@@ -29,9 +29,21 @@ body {
     float: right;
     text-align: right;
 }
+
+#fullclock {
+    width: 800px;
+}
+
 .center {
     margin: auto;
-    width: 800px;
+}
+
+#fullclock {
+    margin-bottom: 820px;
+}
+
+#controls {
+    max-width: 400px;
 }
 
 .main {
@@ -47,4 +59,8 @@ body {
 .description {
     margin: auto;
     max-width: 700px;
+}
+
+.time_display {
+    font-size: 1.3em;
 }
