@@ -3,7 +3,7 @@
 //
 
 // set clock according to position
-function load_position(latitude, longitude) {
+function ticker_position(latitude, longitude) {
     // rotate ticker
     var rad_lon = longitude * Math.PI/180;
     ticker.rotation = rad_lon;
@@ -13,7 +13,6 @@ function load_position(latitude, longitude) {
     var coo = get_azi(latitude, longitude);
     spot.x = coo[0];
     spot.y = coo[1];
-    set_position(latitude, longitude);
 }
 
 // update tickers position

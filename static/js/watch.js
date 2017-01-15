@@ -26,6 +26,9 @@ var SOLAR_DELAY = 0;
 //origin
 var DEF_LAT = 0;
 var DEF_LON = 0;
+//incremement resolution
+var LAT_RES = 10;
+var LON_RES = 10;
 // animation delays in seconds
 var PAGE_DELAY = 0.5;
 var TICK_DELAY = 10;
@@ -34,6 +37,9 @@ var SHADOW_DELAY = 60*30;
 //performance settings
 var REAL_TIME = false;
 var NOWEBGL = true;
+
+//ask immediate render for once
+var ASK_RENDER = false;
 
 
 // Browser specific tweaks
@@ -162,12 +168,13 @@ function animate() {
     var curr_time = Math.round(date.getTime()/1000.0);
     
     // update display after delay
-    if (REAL_TIME || curr_time > flip_page + PAGE_DELAY) {
+    if (REAL_TIME || ASK_RENDER || curr_time > flip_page + PAGE_DELAY) {
         flip_page = curr_time;
-        if (curr_time > flip_tick + TICK_DELAY) {
+        if (ASK_RENDER || curr_time > flip_tick + TICK_DELAY) {
             flip_tick = curr_time;
             // rotate tickers
             update_tickers(date);
+            if (ASK_RENDER) { ASK_RENDER = false; }
         }
         if (curr_time > flip_shadow + SHADOW_DELAY) {
             flip_shadow = curr_time;
@@ -187,11 +194,11 @@ function animate() {
 if ("geolocation" in navigator) {
     /* geolocation is available */
     navigator.geolocation.getCurrentPosition(function(position) {
-        load_position(position.coords.latitude, position.coords.longitude);
+        change_position(position.coords.latitude, position.coords.longitude);
     });
 }
 // set default position
-load_position(DEF_LAT, DEF_LON);
+change_position(DEF_LAT, DEF_LON);
 
 var flip_page = 0;
 var flip_tick = 0;

@@ -6,13 +6,19 @@
 function get_position() {
     var lat = document.getElementById("latitude").value;
     var lon = document.getElementById("longitude").value;
-    if (lat > 90) {
-        lat = 90;
-    } else if (lat < -90) {
-        lat = -90;
+    // do nothing if starting to type negative number
+    if (lat == "-" || lon == "-") {
+        return
     }
-    set_position(lat, lon);
-    load_position(lat, lon);
+    // set to zero if unknown value
+    if (isNaN(Number(lat))) {
+        lat = 0;
+    }
+    if (isNaN(Number(lon))) {
+        lon = 0;
+    }
+    
+    change_position(lat, lon);
 }
 
 // jump to lat lon of major city
@@ -30,14 +36,57 @@ function jump_position() {
             lon = sel["longitude"];
         }
     }
-    set_position(lat, lon);
-    load_position(lat, lon);
+    change_position(lat, lon);
 }
 
 // set html form with active coordinates
-function set_position(latitude, longitude) {
+function form_position(latitude, longitude) {
     document.getElementById("latitude").value = latitude;
     document.getElementById("longitude").value = longitude;
+}
+
+function change_position(lat, lon) {
+    // bound values
+    if (lat > 90) {
+        lat = 90;
+    } else if (lat < -90) {
+        lat = -90;
+    }
+    
+    form_position(lat, lon);
+    ticker_position(lat, lon);
+    
+    // force immediate render of change
+    ASK_RENDER = true;
+}
+
+// incrememnt or decremement latitude / longitude with buttons
+function increment_lon() {
+    var lat = document.getElementById("latitude").value;
+    var lon = document.getElementById("longitude").value;
+    lon = Math.round(Number(lon) + LON_RES);
+    change_position(lat, lon);
+}
+
+function decrement_lon() {
+    var lat = document.getElementById("latitude").value;
+    var lon = document.getElementById("longitude").value;
+    lon = Math.round(Number(lon) - LON_RES);
+    change_position(lat, lon);
+}
+
+function increment_lat() {
+    var lat = document.getElementById("latitude").value;
+    var lon = document.getElementById("longitude").value;
+    lat = Math.round(Number(lat) + LAT_RES);
+    change_position(lat, lon);
+}
+
+function decrement_lat() {
+    var lat = document.getElementById("latitude").value;
+    var lon = document.getElementById("longitude").value;
+    lat = Math.round(Number(lat) - LAT_RES);
+    change_position(lat, lon);
 }
 
 // two digit number display

@@ -43,29 +43,36 @@
                 <div class="text-center lead"><span id="time" class="time_display"></span></div>
             </div>
             <div class="well">
-                <form action="javascript:jump_position()">
+                <form>
                     <p>
                         <label for="city">{{ _('Jump to city :') }}</label>
-                        <select class="form-control" id="city" name="city">
+                        <select class="form-control" id="city" name="city" onchange="jump_position()">
                             <option>{{ _('Choose a city') }}</option>
                         </select>
-                        <p>
-                            <input class="btn btn-primary"  type="submit" value="{{ _('Jump') }}" />
-                        </p>
                     </p>
                 </form>
                 
-                <form action="javascript:get_position()">
+                <form>
                     <p>
                         <label for="latitude">{{ _('Latitude :') }}</label>
-                        <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20"/>
-                        
-                        <label for="longitude">{{ _('Longitude :') }}</label>
-                        <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"/>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20" oninput="get_position()"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="increment_lat()"><span class="glyphicon glyphicon-plus"></span></button>
+                                <button class="btn btn-default" type="button" onclick="decrement_lat()"><span class="glyphicon glyphicon-minus"></button>
+                            </span>
+                        </div>
                     </p>
-                    
+                        
                     <p>
-                        <input class="btn btn-primary" type="submit" value="{{ _('Send Coordinates') }}" />
+                        <label for="longitude">{{ _('Longitude :') }}</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"  oninput="get_position()"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="increment_lon()"><span class="glyphicon glyphicon-plus"></span></button>
+                                <button class="btn btn-default" type="button" onclick="decrement_lon()"><span class="glyphicon glyphicon-minus"></button>
+                            </span>
+                        </div>
                     </p>
                 </form>
                 
