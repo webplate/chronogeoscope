@@ -1,3 +1,16 @@
+// The Chronogeoscope
+// 
+// is distributued under the license CC-BY-NC-SA
+// https://creativecommons.org/licenses/by-nc-sa/4.0/
+// 
+// Design: Roberto Casati and Glen Lomax
+// Main developper: Glen Lomax
+// Website: https://github.com/webplate/chronogeoscope
+// Disclaimer: we cannot take any responsibility
+// for uses that go beyond the intended educational use of the software.
+
+// Configuration variables
+//
 var SCREEN_WIDTH = 794;
 var SCREEN_HEIGHT = SCREEN_WIDTH;
 var CANVAS_WIDTH = 800;
@@ -23,23 +36,34 @@ var SHADOW_ALPHA = 0.15;
 var CITY_ALPHA = 1;
 var SOLAR_DELAY = 0;
 
-//origin
+// Default lat/lon setting
 var DEF_LAT = 0;
 var DEF_LON = 0;
-//incremement resolution
+// lat/lon change incremement resolution
 var LAT_RES = 10;
-var LON_RES = 10;
-// animation delays in seconds
+var LON_RES = 5;
+var LON_LIMIT = 999999;
+// Animation delays in seconds
 var PAGE_DELAY = 0.5;
 var TICK_DELAY = 10;
 var SHADOW_DELAY = 60*30;
+// interactivity on canvas (EXPERIMENTAL)
+var INTERACTIVE = false;
 
-//performance settings
+// Performance settings
 var REAL_TIME = false;
 var NOWEBGL = true;
 
-//ask immediate render for once
+// Ask immediate render for once
 var ASK_RENDER = false;
+
+
+// Global variables in app
+//
+var GLOB_ANGLE = 0;
+// Responsivness
+var GLOB_LAST_DIMS = ""; //signature of dimensions on which depends layout
+var GLOB_ACTUAL_SIZE = 0;
 
 
 // Browser specific tweaks
@@ -154,7 +178,7 @@ var resizeTimer;
 
 $(window).resize(function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(adapt_to_screen_size, 100);
+    resizeTimer = setTimeout(adapt_to_screen_size, 50);
 });
 
 //
@@ -184,6 +208,9 @@ function animate() {
 
         // update time display
         update_time_display(date);
+        
+        // responsivness
+        adapt_to_screen_size()
         
         // render the root container
         renderer.render(stage);

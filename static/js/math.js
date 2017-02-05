@@ -36,7 +36,7 @@ function get_tilt_cart(lat, lon, tilt) {
     return [coo2[0], coo2[1], coo2[2]];
 }
 
-//~ return sperical coordinates from cartesian
+//~ return spherical coordinates from cartesian
 function get_spher(x, y, z) {
     var lon = Math.atan2(y, x);
     var lat = Math.acos(z);
@@ -58,5 +58,37 @@ function azi_to_spher(x, y) {
     var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     var lon = Math.acos(y / r);
     var lat = r/(MAP_W/2) * Math.PI;
+    return [lat, lon];
+}
+
+// longitude should remain between -180 and 180°
+function correct_lon(lon) {
+    // bound values    
+    if (lon > 180) {
+        while (lon > 180) {
+            lon -= 180;
+        }
+        lon -= 180;
+    }
+    
+    if (lon < -180) {
+        while (lon < -180) {
+            lon += 180;
+        }
+        lon += 180;
+    }
+    return lon;
+}
+
+// convert 2D azimutal pixel map coord to spherical in map notation (degrees)
+function azi_to_map(x, y) {
+    // distance from center
+    var r = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    var lat = r/(MAP_W/2) * Math.PI * 180/Math.PI - 90;  // take into account actual size
+    
+    // convert to polar and add angle of chronogeoscope map
+    var lon = (Math.atan2(x, -y) - GLOB_ANGLE) * 180/Math.PI;
+    //~ lon = correct_lon(lon);
+        
     return [lat, lon];
 }

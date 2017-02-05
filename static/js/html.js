@@ -2,14 +2,65 @@
 // HTML interaction
 //
 
+// set html form with active coordinates
+function form_position(latitude, longitude) {
+    document.getElementById("latitude").value = latitude;
+    document.getElementById("longitude").value = longitude;
+}
+
+// set the chronogeoscope on specific lat/lon
+function change_position(lat, lon) {
+    // convert to numbers
+    lat = Number(lat);
+    lon = Number(lon);
+    // set to zero if unknown value
+    if (isNaN(lat)) {
+        lat = 0;
+    }
+    if (isNaN(lon)) {
+        lon = 0;
+    }
+    // bound values
+    if (lat > 90) {
+        lat = 90;
+    } else if (lat < -90) {
+        lat = -90;
+    }
+    if (lon > LON_LIMIT) {
+        lon = LON_LIMIT;
+    } else if (lon < -LON_LIMIT) {
+        lon = -LON_LIMIT;
+    }
+    
+    // modify html display
+    form_position(lat, lon);
+    // modify canvas
+    ticker_position(lat, lon);
+    
+    // force immediate render of change
+    ASK_RENDER = true;
+}
+
 // use position from form
 function get_position() {
     var lat = document.getElementById("latitude").value;
     var lon = document.getElementById("longitude").value;
+        
+    // help user to enter negative numbers
+    if (lat == "0-") {
+        document.getElementById("latitude").value = "-";
+        return;
+    }
+    if (lon == "0-") {
+        document.getElementById("longitude").value = "-";
+        return;
+    }
+    
     // do nothing if starting to type negative number
     if (lat == "-" || lon == "-") {
-        return
+        return;
     }
+    
     // set to zero if unknown value
     if (isNaN(Number(lat))) {
         lat = 0;
@@ -37,27 +88,6 @@ function jump_position() {
         }
     }
     change_position(lat, lon);
-}
-
-// set html form with active coordinates
-function form_position(latitude, longitude) {
-    document.getElementById("latitude").value = latitude;
-    document.getElementById("longitude").value = longitude;
-}
-
-function change_position(lat, lon) {
-    // bound values
-    if (lat > 90) {
-        lat = 90;
-    } else if (lat < -90) {
-        lat = -90;
-    }
-    
-    form_position(lat, lon);
-    ticker_position(lat, lon);
-    
-    // force immediate render of change
-    ASK_RENDER = true;
 }
 
 // incrememnt or decremement latitude / longitude with buttons
@@ -120,51 +150,87 @@ function update_time_display(date) {
 
 
 // Responsivness
+
 function adapt_to_screen_size() {
-    
+    // dimensions to check for adaptation
     var win_width = $(window).width();
     var win_height = $(window).height();
+    var controls_height = $("#controls").height();
     
-    // elements to organize
-    var fullclock = document.getElementById("fullclock");
-    var controls = document.getElementById("controls");
-    var overcanvas = document.getElementById("overcanvas");
+    var d = "";
+    d += win_width;
+    d += win_height;
+    d += controls_height;
     
-    var controls_height = $("#controls").outerHeight();
+    // update only if there's any change
+    if (GLOB_LAST_DIMS != d) {
+        GLOB_LAST_DIMS = d;
     
-    // resize clock from viewport size
-    // works only for square clocks !!
-    if (win_width < CANVAS_WIDTH || win_height < CANVAS_HEIGHT) {
-        var actual_size = Math.min(win_width, win_height);
-    } else {
-        var actual_size = CANVAS_WIDTH;
-    }
-    renderer.view.style.width = String(actual_size) + 'px';
-    renderer.view.style.height = String(actual_size) + 'px';
     
-    overcanvas.style.width = String(actual_size) + 'px';
-    overcanvas.style.height = String(actual_size) + 'px';
-    fullclock.style.width = String(actual_size) + 'px';
-    
+        // elements to organize
+        var fullclock = document.getElementById("fullclock");
+        var controls = document.getElementById("controls");
+        var overcanvas = document.getElementById("overcanvas");
         
-    // threshold to change layout
-    var t = CANVAS_WIDTH + CONTROLS_WIDTH + 40;
-    var limit = Math.round(win_width / 2 + (actual_size - CONTROLS_WIDTH) / 2);
-    // adapt layout from viewport size
-    if (win_width > t && win_height > controls_height) {   
-        fullclock.style.marginBottom = '0px';
-        fullclock.style.marginLeft = String(limit - actual_size) + 'px';
+        // resize clock from viewport size
+        // works only for square clocks !!
+        if (win_width < CANVAS_WIDTH || win_height < CANVAS_HEIGHT) {
+            GLOB_ACTUAL_SIZE = Math.min(win_width, win_height);
+        } else {
+            GLOB_ACTUAL_SIZE = CANVAS_WIDTH;
+        }
+        renderer.view.style.width = String(GLOB_ACTUAL_SIZE) + 'px';
+        renderer.view.style.height = String(GLOB_ACTUAL_SIZE) + 'px';
         
-        controls.style.marginLeft = String(limit) + 'px';
-        controls.style.marginTop = String(Math.round((actual_size - controls_height) / 2)+20) + 'px';
-        controls.style.marginBottom = String(Math.round((actual_size - controls_height) / 2) + 20) + 'px';
+        overcanvas.style.width = String(GLOB_ACTUAL_SIZE) + 'px';
+        overcanvas.style.height = String(GLOB_ACTUAL_SIZE) + 'px';
+        fullclock.style.width = String(GLOB_ACTUAL_SIZE) + 'px';
+        
+            
+        // threshold to change layout
+        var t = GLOB_ACTUAL_SIZE + CONTROLS_WIDTH + 40;
+        var limit = Math.round(win_width / 2 + (GLOB_ACTUAL_SIZE - CONTROLS_WIDTH) / 2);
+        // adapt layout from viewport size
+        if (win_width > t && win_height > controls_height) { 
+            fullclock.style.marginBottom = '0px';
+            fullclock.style.marginLeft = String(limit - GLOB_ACTUAL_SIZE) + 'px';
+            
+            controls.style.marginLeft = String(limit) + 'px';
+            controls.style.marginTop = String(Math.round((GLOB_ACTUAL_SIZE - controls_height) / 2)+20) + 'px';
+            controls.style.marginBottom = String(Math.round((GLOB_ACTUAL_SIZE - controls_height) / 2) + 20) + 'px';
 
-    } else if (win_width <= t || win_height <= controls_height) {
-        fullclock.style.marginBottom = String(Math.min(win_width, actual_size) + 40) + 'px';
-        fullclock.style.marginLeft = '';
-        
-        controls.style.marginLeft = '';
-        controls.style.marginTop = '';
-        controls.style.marginBottom = '';
+        } else {
+            fullclock.style.marginBottom = String(Math.min(win_width, GLOB_ACTUAL_SIZE) + 40) + 'px';
+            fullclock.style.marginLeft = '';
+            
+            controls.style.marginLeft = '';
+            controls.style.marginTop = '';
+            controls.style.marginBottom = '';
+        }
     }
+}
+
+// intercept coordinates of click on canvas
+function getCursorPosition(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    return [x, y];
+}
+
+if (document.addEventListener) {                // For all major browsers, except IE 8 and earlier
+    document.addEventListener("click", function(event) {
+        if (INTERACTIVE) {
+            var canvas = document.getElementById("clock");
+            var coo = getCursorPosition(canvas, event);
+            var centered_coo = [coo[0] - GLOB_ACTUAL_SIZE/2, coo[1] - GLOB_ACTUAL_SIZE/2];
+            var coo2 = azi_to_map(centered_coo[0], centered_coo[1]);
+            // if the click is on the map
+            if (coo2[0] <= 90) {
+                change_position(coo2[0], coo2[1]);
+            }
+        }
+    });
+} else if (document.attachEvent) {              // For IE 8 and earlier versions
+    document.attachEvent("onclick", myFunction);
 }

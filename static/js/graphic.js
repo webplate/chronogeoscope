@@ -17,9 +17,11 @@ function ticker_position(latitude, longitude) {
 
 // update tickers position
 function update_tickers(date) {
-    // calculate analogic UTC time
+    // compute analogic UTC time
     var aHour = date.getUTCHours() + date.getUTCMinutes()/60.0 + date.getUTCSeconds()/3600.0;
     var angle = aHour / 24. * 2 * Math.PI;
+    // keep in global variable
+    GLOB_ANGLE = angle;
     //rotate the container
     back_cont.rotation = angle;
     front_cont.rotation = angle;
