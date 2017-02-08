@@ -61,6 +61,10 @@ body {
     max-width: 700px;
 }
 
+.description p {
+    text-align: justify;
+}
+
 .time_display {
     font-size: 1.3em;
 }
