@@ -44,36 +44,32 @@
             </div>
             <div class="well">
                 <form>
-                    <p>
-                        <label for="city">{{ _('Jump to city :') }}</label>
-                        <select class="form-control" id="city" name="city" onchange="jump_position()">
-                            <option>{{ _('Choose a city') }}</option>
-                        </select>
-                    </p>
-                </form>
-                
-                <form>
-                    <p>
-                        <label for="latitude">{{ _('Latitude :') }}</label>
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20" oninput="get_position()"/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="increment_lat()"><span class="glyphicon glyphicon-plus"></span></button>
-                                <button class="btn btn-default" type="button" onclick="decrement_lat()"><span class="glyphicon glyphicon-minus"></button>
-                            </span>
-                        </div>
-                    </p>
-                        
-                    <p>
-                        <label for="longitude">{{ _('Longitude :') }}</label>
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"  oninput="get_position()"/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="increment_lon()"><span class="glyphicon glyphicon-plus"></span></button>
-                                <button class="btn btn-default" type="button" onclick="decrement_lon()"><span class="glyphicon glyphicon-minus"></button>
-                            </span>
-                        </div>
-                    </p>
+                    <label for="city">{{ _('Jump to city :') }}</label>
+                    <select class="form-control" id="city" name="city" onchange="jump_position()">
+                        <option>{{ _('Choose a city') }}</option>
+                    </select>
+                    
+                    <br>
+                    
+                    <label for="latitude">{{ _('Latitude :') }}</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="latitude" id="latitude" placeholder="0" maxlength="20" oninput="get_position()"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="increment_lat()"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-default" type="button" onclick="decrement_lat()"><span class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                    </div>
+                    
+                    <br>
+                    
+                    <label for="longitude">{{ _('Longitude :') }}</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="longitude" id="longitude" placeholder="-90" maxlength="20"  oninput="get_position()"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="increment_lon()"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-default" type="button" onclick="decrement_lon()"><span class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                    </div>
                 </form>
                 
             </div>
@@ -85,8 +81,8 @@
 <small class="credit">
     {% autoescape false %}
     {{ _('by %(roberto)s and %(glen)s,', roberto='<a href="http://shadowes.org/">Roberto Casati</a>', glen='Glen Lomax') }}
-    {% endautoescape %}</br>
-    Institut Jean Nicod, CNRS-EHESS-ENS, Paris, </br>
+    {% endautoescape %}<br>
+    Institut Jean Nicod, CNRS-EHESS-ENS, Paris, <br>
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC-BY-NC-SA)</a>
 </small>
 
@@ -184,9 +180,10 @@ In the Austral Summer/Boreal Winter (December through March) the shadow engulfs 
 
         </div>
         <div><p>.</p></div><!-- Add a lower margin with parallax effect -->
-    </div>
+        
+    </div> <!-- End of description well -->
 
-    </div>
+
     
     <!-- Libraries -->
     <script src="static/js/jquery.min.js"></script>
