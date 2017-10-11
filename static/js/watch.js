@@ -47,8 +47,11 @@ var LON_LIMIT = 999999;
 var PAGE_DELAY = 0.5;
 var TICK_DELAY = 10;
 var SHADOW_DELAY = 60*30;
-// interactivity on canvas (EXPERIMENTAL)
+// EXPERIMENTAL
+// interactivity on canvas
 var INTERACTIVE = false;
+// accelerated mode
+var ACCELERATED = false;
 
 // Performance settings
 var REAL_TIME = false;
@@ -186,43 +189,70 @@ $(window).resize(function () {
 //
 
 function animate() {    
+    requestAnimationFrame(animate);
     // create time representation
-    var date = new Date();
+    var newFrame = +new Date;
+    var diff = newFrame - lastFrame;
+    var curr_sec = Math.round(newFrame/1000.0);
     
-    var curr_time = Math.round(date.getTime()/1000.0);
+    // decorelate simulation time and real time
+    if (ACCELERATED) {
+        var t = frame_nb;
+        //~ factor = bumpy(t, 1, 3000000, 500, 100); //year setting
+        factor = bumpy(t, 1, 12000, 100, 20); // day setting
+        simulTime = Math.round(simulTime + diff * factor);
+    } else {
+        simulTime = newFrame;
+    }
+    date = new Date;
+    date.setTime(simulTime);
+    lastFrame = newFrame;
     
     // update display after delay
-    if (REAL_TIME || ASK_RENDER || curr_time > flip_page + PAGE_DELAY) {
-        flip_page = curr_time;
-        if (ASK_RENDER || curr_time > flip_tick + TICK_DELAY) {
-            flip_tick = curr_time;
+    if (REAL_TIME || ASK_RENDER || ACCELERATED || curr_sec > flip_page + PAGE_DELAY) {
+        flip_page = curr_sec;
+        if (ASK_RENDER || ACCELERATED || curr_sec > flip_tick + TICK_DELAY) {
+            flip_tick = curr_sec;
             // rotate tickers
             update_tickers(date);
-            if (ASK_RENDER) { ASK_RENDER = false; }
         }
-        if (curr_time > flip_shadow + SHADOW_DELAY) {
-            flip_shadow = curr_time;
+        if (ASK_RENDER || ACCELERATED || curr_sec > flip_shadow + SHADOW_DELAY) {
+            flip_shadow = curr_sec;
             // load correct earth self-shadowing
             update_shadow(date);
         }
-
+        if (ASK_RENDER) { ASK_RENDER = false; }
         // update time display
         update_time_display(date);
         
         // responsivness
-        adapt_to_screen_size()
+        adapt_to_screen_size();
         
         // render the root container
         renderer.render(stage);
+        frame_nb += 1;
     }
-    requestAnimationFrame(animate);
 }
+
+// geolocation
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+  change_position(crd.latitude, crd.longitude);
+};
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
 
 if ("geolocation" in navigator) {
     /* geolocation is available */
-    navigator.geolocation.getCurrentPosition(function(position) {
-        change_position(position.coords.latitude, position.coords.longitude);
-    });
+    navigator.geolocation.getCurrentPosition(success, error, options);
 }
 // set default position
 change_position(DEF_LAT, DEF_LON);
@@ -230,6 +260,9 @@ change_position(DEF_LAT, DEF_LON);
 var flip_page = 0;
 var flip_tick = 0;
 var flip_shadow = 0;
+var frame_nb = 1;
+var lastFrame = +new Date;
+var simulTime = +new Date;
 // start animating
 animate();
 // initialize responsivness

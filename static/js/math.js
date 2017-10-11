@@ -92,3 +92,37 @@ function azi_to_map(x, y) {
         
     return [lat, lon];
 }
+
+// sigmoid between 0 and 1 of length l starting from s
+function sigmoid(x, l, s) {
+    return 6*Math.pow(((x-s)/l),5) - 15*Math.pow(((x-s)/l),4) + 10*Math.pow(((x-s)/l),3);
+}
+
+// sigmoid between 1 and 0 of length l starting from s
+function reverse_sigmoid(x, l, s) {
+    return 1 - sigmoid(x, l, s);
+}
+
+// returns bumping values from time t consisting of:
+// sigmoid from min to max during l
+// plateau during L
+// sigmoid from max to min during l
+// plateau during L
+// and loop
+function bumpy(t, min, max, l, L) {
+    var total = 2*l + 2*L;
+    var rem = (t) % total;
+    
+    if (rem < l) {
+        factor = sigmoid(rem, l, 0);
+    } else if (l <= rem && rem < l + L) {
+        factor = 1;
+    } else if (l + L <= rem && rem < 2*l + L) {
+        factor = reverse_sigmoid(rem, l, l + L);
+    } else if (rem >= 2*l + L) {
+        factor = 0;
+    }
+    factor *= max-min;
+    factor += min;
+    return factor;
+}

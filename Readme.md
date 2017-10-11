@@ -5,7 +5,7 @@
 
 Demo and explanations:
 
-**https://science-trotter.com/chronogeoscope/**
+**https://lambda.casa/chronogeoscope/**
 
 It's a wsgi application. Serve it in production with:
 
