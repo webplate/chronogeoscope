@@ -5,7 +5,7 @@
 
 Demo and explanations:
 
-**https://91.121.141.56/chronogeoscope/**
+**https://lambda.casa/chronogeoscope/**
 
 It's a wsgi application. Serve it with:
 
