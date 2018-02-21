@@ -25,10 +25,10 @@ LANGUAGES = {
 def get_locale():
     return request.accept_languages.best_match(LANGUAGES.keys())
 
-    app.run(host='0.0.0.0', port=5005)
+@app.route('/')
+def main_page():
+    return render_template('main.html')
 
 if __name__ == '__main__':
     app.debug = True
-@
-if __name__ == '__main__':
-    app.debug = True
+    app.run(host='0.0.0.0', port=5005)
