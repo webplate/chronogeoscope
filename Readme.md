@@ -23,8 +23,9 @@ http://localhost:5005
 
 Dependencies:
 
-- Python
+- Python 3
 - Flask (pip install Flask)
+- Babel & Flask-Babel
 
 Included dependencies:
 
