@@ -1,21 +1,21 @@
 # Translations template for PROJECT.
-# Copyright (C) 2017 ORGANIZATION
+# Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-02-05 15:14+0100\n"
+"POT-Creation-Date: 2018-06-25 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.6.0\n"
 
 #: templates/main.html:5
 msgid "Chronogeoscope"
@@ -41,42 +41,42 @@ msgstr ""
 msgid "Greenwich mean time"
 msgstr ""
 
-#: templates/main.html:48
+#: templates/main.html:47
 msgid "Jump to city :"
 msgstr ""
 
-#: templates/main.html:50
+#: templates/main.html:49
 msgid "Choose a city"
 msgstr ""
 
-#: templates/main.html:57
+#: templates/main.html:54
 msgid "Latitude :"
 msgstr ""
 
-#: templates/main.html:68
+#: templates/main.html:65
 msgid "Longitude :"
 msgstr ""
 
-#: templates/main.html:87
+#: templates/main.html:83
 #, python-format
 msgid "by %(roberto)s and %(glen)s,"
 msgstr ""
 
-#: templates/main.html:93
+#: templates/main.html:89
 msgid "What is the Chronogeoscope ?"
 msgstr ""
 
-#: templates/main.html:95
+#: templates/main.html:91
 msgid ""
 "The Chronogeoscope is an educational software that makes it possible to "
 "study the conceptual tie between time and place in a watch."
 msgstr ""
 
-#: templates/main.html:97
+#: templates/main.html:93
 msgid "The idea:"
 msgstr ""
 
-#: templates/main.html:97
+#: templates/main.html:93
 msgid ""
 "Your location on a map of the Earth provides the hour hand of a 24 hour "
 "clock. By reading the number on the hour ring corresponding to your "
@@ -85,21 +85,21 @@ msgid ""
 " to get an idea of the current time."
 msgstr ""
 
-#: templates/main.html:99
+#: templates/main.html:95
 msgid "Why use this particular type of representation ?"
 msgstr ""
 
-#: templates/main.html:101
+#: templates/main.html:97
 msgid ""
 "We wanted to show that hidden in each watch's face there is an implicit "
 "image of the Earth's spin. The Earth is its own clock !"
 msgstr ""
 
-#: templates/main.html:103
+#: templates/main.html:99
 msgid "How did we do it ?"
 msgstr ""
 
-#: templates/main.html:106
+#: templates/main.html:102
 msgid ""
 "We divided the time on the watch's face not in 12, but in 24 hours. We "
 "then turned the clock's face into a representation of the Earth centered "
@@ -109,7 +109,7 @@ msgid ""
 "patient enough, you will see that the map gently rotates."
 msgstr ""
 
-#: templates/main.html:108
+#: templates/main.html:104
 msgid ""
 "At this point, the key idea is to find your location on the map. This is "
 "done either by entering the location directly in the Latitude and "
@@ -117,13 +117,13 @@ msgid ""
 "You position is then indicated by the red dot."
 msgstr ""
 
-#: templates/main.html:110
+#: templates/main.html:106
 msgid ""
 "Your location is the hour hand on a 24 hour-period rotating map of the "
 "world. This means that you can use space to tell the time."
 msgstr ""
 
-#: templates/main.html:112
+#: templates/main.html:108
 msgid ""
 "Here comes the important part: the way we built it, the red dot does not "
 "talk to a timepiece that tells the hour, but to a GPS that tells the "
@@ -131,7 +131,7 @@ msgid ""
 "rotation at the 24 hour period."
 msgstr ""
 
-#: templates/main.html:114
+#: templates/main.html:110
 msgid ""
 "We added another hand that does take input from a real clock: whereas the"
 " red dot specified solar time, the thin hand signals the actual "
@@ -140,11 +140,11 @@ msgid ""
 " East of your current location!)"
 msgstr ""
 
-#: templates/main.html:117
+#: templates/main.html:113
 msgid "Can you explain the strange shape of the night shadow ?"
 msgstr ""
 
-#: templates/main.html:119
+#: templates/main.html:115
 msgid ""
 "The shaded area represents the night on Earth. The Sun is to be found in "
 "the direction of Noon. The shape of the shadow depends on two factors: "
@@ -152,7 +152,7 @@ msgid ""
 "Projection."
 msgstr ""
 
-#: templates/main.html:121
+#: templates/main.html:117
 msgid ""
 "In the Boreal Summer=Austral Winter (June through September) the shadow "
 "engulfs the South Pole and does not touch the North Pole, which in the "
@@ -162,11 +162,11 @@ msgid ""
 "engulfs the degenerate representation of the North Pole."
 msgstr ""
 
-#: templates/main.html:124
+#: templates/main.html:120
 msgid "Is it possible to give more details about the Chronogeoscope ?"
 msgstr ""
 
-#: templates/main.html:126
+#: templates/main.html:122
 msgid ""
 "Used on Earth, a clock does not only tell the time, it also tells what "
 "meridian you are on (modulo time zones). For instance, it tells you that "
@@ -176,7 +176,7 @@ msgid ""
 " now noon in Paris."
 msgstr ""
 
-#: templates/main.html:128
+#: templates/main.html:124
 msgid ""
 "Accordingly, a clock can misinform you about your location. It tells you "
 "that it is noon now. And now it is noon in Paris. The clock tells you "
@@ -189,7 +189,7 @@ msgid ""
 "know you are in London."
 msgstr ""
 
-#: templates/main.html:130
+#: templates/main.html:126
 msgid ""
 "Consider a 24 hours dial. In place of the marks for 12 hours, it has "
 "marks for 24 hours. Make it a bit more complex. Instead of the hour hand,"
@@ -204,7 +204,7 @@ msgid ""
 "purposes."
 msgstr ""
 
-#: templates/main.html:132
+#: templates/main.html:128
 msgid ""
 "Have the movement set relative to a standard of time, for instance by "
 "setting 00:00 at the Greenwhich meridian. Determine where you are, and "
@@ -219,7 +219,7 @@ msgid ""
 "hand is just a meridian on that map: your meridian."
 msgstr ""
 
-#: templates/main.html:134
+#: templates/main.html:130
 msgid ""
 "An Azimuthal Equidistant Projection is mounted on a 24-hour clock face. "
 "The hour hand is replaced by an indicator of the current position of the "
@@ -230,7 +230,7 @@ msgid ""
 " set for the Southern hemisphere."
 msgstr ""
 
-#: templates/main.html:136
+#: templates/main.html:132
 msgid ""
 "Perfectly working clocks can fail to tell the time. If you are at the "
 "South Pole, the red dot is at the center of the clock's face. It lies on "
@@ -244,7 +244,7 @@ msgid ""
 "information."
 msgstr ""
 
-#: templates/main.html:138
+#: templates/main.html:134
 msgid ""
 "A sundial whose stylus coincides with the North (or the South) Pole and "
 "is parallel to the Earth's axis just indicates where on Earth it is now "
@@ -253,11 +253,11 @@ msgid ""
 "a midnight sun shines)."
 msgstr ""
 
-#: templates/main.html:141
+#: templates/main.html:137
 msgid "A Southern perspective"
 msgstr ""
 
-#: templates/main.html:143
+#: templates/main.html:139
 msgid ""
 "Many complaints have been addressed to the Northern bias in geographic "
 "representation: in most maps, North is up, South is down. The "
@@ -274,11 +274,11 @@ msgid ""
 "Pole, the North Pole is everywhere on the outer border of the map.)"
 msgstr ""
 
-#: templates/main.html:145
+#: templates/main.html:141
 msgid "How to make the most of it ?"
 msgstr ""
 
-#: templates/main.html:147
+#: templates/main.html:143
 msgid ""
 "The Cronogeoscope is a slow educational device. It spins at the angular "
 "speed of the Earth, (15°/hour), thus your vision can't tell that it "
@@ -292,11 +292,11 @@ msgid ""
 " to the walls."
 msgstr ""
 
-#: templates/main.html:149
+#: templates/main.html:145
 msgid "Disclaimer"
 msgstr ""
 
-#: templates/main.html:151
+#: templates/main.html:147
 msgid ""
 "The Chronogeoscope is not a measuring or a precision instrument. It is "
 "not a clock, but an approximate model of the Earth's spin. Its use is "
@@ -306,12 +306,12 @@ msgid ""
 "educational use of the software."
 msgstr ""
 
-#: templates/main.html:155
+#: templates/main.html:151
 #, python-format
 msgid "What is a %(license)s license ?"
 msgstr ""
 
-#: templates/main.html:161
+#: templates/main.html:157
 #, python-format
 msgid ""
 "A %(license)s license allows you to do practically anything noncommercial"
@@ -321,40 +321,65 @@ msgid ""
 "texts at creativecommons.org"
 msgstr ""
 
+#: templates/main.html:161
+msgid "Confidentiality Rules"
+msgstr ""
+
+#: templates/main.html:163
+msgid ""
+"This application uses your position only locally. Thus your location "
+"isn't shared with us or stored anywhere. Except for viewing statistics on"
+" this webpage, we don't keep any information about our users."
+msgstr ""
+
 #: templates/main.html:165
-msgid "Where can I find the source code ?"
+msgid "Android version"
 msgstr ""
 
 #: templates/main.html:167
+msgid ""
+"We have an application on Google Play. Try it by following this link to "
+"the app-store:"
+msgstr ""
+
+#: templates/main.html:169
+msgid "Chronogeoscope for Android"
+msgstr ""
+
+#: templates/main.html:171
+msgid "Where can I find the source code ?"
+msgstr ""
+
+#: templates/main.html:173
 msgid ""
 "Everything is published on GitHub with setup instructions to host your "
 "own or to try and improve it !"
 msgstr ""
 
-#: templates/main.html:169
+#: templates/main.html:175
 msgid "Find the source code at : "
 msgstr ""
 
-#: templates/main.html:172
+#: templates/main.html:179
 msgid "Who are we ?"
 msgstr ""
 
-#: templates/main.html:174
+#: templates/main.html:181
 msgid "Roberto Casati is a Senior researcher with the French CNRS."
 msgstr ""
 
-#: templates/main.html:176
+#: templates/main.html:183
 msgid "Glen Lomax is an independent researcher and coder."
 msgstr ""
 
-#: templates/main.html:179
+#: templates/main.html:186
 #, python-format
 msgid ""
 "Together, Casati and Lomax have published the open source educational "
 "software %(astrini)s."
 msgstr ""
 
-#: templates/main.html:181
+#: templates/main.html:188
 #, python-format
 msgid ""
 "The Chronogeoscope software and this explanatory text are published under"
