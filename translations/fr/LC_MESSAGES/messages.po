@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-06-25 16:32+0200\n"
-"PO-Revision-Date: 2018-06-25 16:40+0200\n"
+"PO-Revision-Date: 2018-10-03 03:35+0200\n"
 "Last-Translator: Glen Lomax <glenlomax@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -513,7 +513,7 @@ msgstr "Qui sommes-nous&nbsp;?"
 
 #: templates/main.html:181
 msgid "Roberto Casati is a Senior researcher with the French CNRS."
-msgstr "Roberto Casati est chercheur chevronné au sein du CNRS."
+msgstr "Roberto Casati est directeur de recherche au sein du CNRS."
 
 #: templates/main.html:183
 msgid "Glen Lomax is an independent researcher and coder."
